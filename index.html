@@ -166,8 +166,8 @@ html,body{ width:100%; background:var(--negro); overflow-x:hidden; font-family:'
 .srv-cards li{
   list-style:none;
   padding:0; margin:0;
-  width:240px;
-  height:384px;
+  width:320px;
+  height:512px;
   position:absolute;
   top:50%;
   left:50%;
@@ -288,7 +288,7 @@ html,body{ width:100%; background:var(--negro); overflow-x:hidden; font-family:'
   gap:76px;
   align-items:center;
   flex-shrink:0;
-  width:calc(100vw - 112px);
+  width:75vw;
 }
 .caso-img-wrap{
   width:477px;
@@ -1023,8 +1023,8 @@ window.addEventListener('resize', initBento);
 (function(){
   const cards   = Array.from(document.querySelectorAll('#srvCards li'));
   const total   = cards.length;
-  const W       = 240;   // ancho carta px
-  const GAP     = 280;   // distancia entre centros de cartas
+  const W       = 320;   // ancho carta px
+  const GAP     = 370;   // distancia entre centros de cartas
   let current   = 2;
 
   function render(animated) {
