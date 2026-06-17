@@ -172,7 +172,7 @@ html,body{ width:100%; background:var(--negro); overflow-x:hidden; font-family:'
   top:50%;
   left:50%;
   border-radius:14px;
-  background-size:contain;
+  background-size:calc(100% - 8px);
   background-repeat:no-repeat;
   background-position:center center;
   transition:transform 0.5s cubic-bezier(.76,0,.24,1), opacity 0.5s, scale 0.5s;
@@ -581,6 +581,35 @@ html,body{ width:100%; background:var(--negro); overflow-x:hidden; font-family:'
 }
 #logo-sticky.visible{ opacity:1; }
 
+
+/* ── BACK TO TOP ── */
+#back-to-top{
+  position:fixed;
+  bottom:31px;
+  right:56px;
+  z-index:9997;
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  border:2px solid #ffffff;
+  background:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .3s ease;
+  mix-blend-mode:difference;
+}
+#back-to-top.visible{
+  opacity:1;
+  pointer-events:all;
+}
+#back-to-top svg{
+  width:16px;
+  height:16px;
+}
+
 /* ── CUSTOM CURSOR ── */
 *{ cursor: none !important; }
 #js-cursor{
@@ -603,6 +632,11 @@ html,body{ width:100%; background:var(--negro); overflow-x:hidden; font-family:'
 </head>
 <body>
 <div id="js-cursor"></div>
+<button id="back-to-top" aria-label="Volver arriba">
+  <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8 13V3M8 3L3 8M8 3L13 8" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
 <div id="logo-sticky"><svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 287.47 180.7">
   <g id="Capa_1-2" data-name="Capa 1">
     <path fill="white" d="M24.49,0c4.78,0,8.66,3.98,8.66,8.88s-3.89,8.88-8.66,8.88-8.66-3.99-8.66-8.88S19.71,0,24.49,0"/>
@@ -1067,6 +1101,18 @@ window.addEventListener('resize', initBento);
       logo.classList.remove('visible');
     }
   }, { passive: true });
+})();
+
+
+// ── BACK TO TOP ──
+(function(){
+  const btn = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > window.innerHeight);
+  }, { passive: true });
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 })();
 
 // ── CUSTOM CURSOR ──
