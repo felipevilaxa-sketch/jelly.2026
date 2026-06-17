@@ -587,7 +587,7 @@ html,body{ width:100%; background:var(--negro); overflow-x:hidden; font-family:'
   position:fixed;
   bottom:31px;
   right:56px;
-  z-index:9997;
+  z-index:899;
   width:44px;
   height:44px;
   border-radius:50%;
@@ -604,6 +604,10 @@ html,body{ width:100%; background:var(--negro); overflow-x:hidden; font-family:'
 #back-to-top.visible{
   opacity:1;
   pointer-events:all;
+}
+#back-to-top.hidden{
+  opacity:0 !important;
+  pointer-events:none;
 }
 #back-to-top svg{
   width:16px;
@@ -1112,6 +1116,13 @@ window.addEventListener('resize', initBento);
   }, { passive: true });
   btn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  // Ocultar cuando el menú está abierto
+  document.getElementById('hamburger').addEventListener('click', () => {
+    btn.classList.add('hidden');
+  });
+  document.getElementById('btnClose').addEventListener('click', () => {
+    btn.classList.remove('hidden');
   });
 })();
 
