@@ -161,16 +161,18 @@ html,body{ width:100%; background:var(--negro); overflow-x:hidden; font-family:'
   font-weight:700;
   font-size:24px;
   line-height:1;
-  color:var(--blanco);
+  color:#555;
   text-decoration:none;
   white-space:nowrap;
   pointer-events:all;
   display:flex;
   align-items:center;
   gap:10px;
-  transition:opacity .2s;
+  transition:color .25s;
 }
-.volver-link:hover{ opacity:0.7; }
+.volver-link svg path{ stroke:#555; transition:stroke .25s; }
+.volver-link:hover{ color:var(--blanco); }
+.volver-link:hover svg path{ stroke:var(--blanco); }
 
 /* ── HERO DEL CASO ── */
 .caso-hero{
@@ -427,6 +429,7 @@ function buildOpenTl() {
     .to(panel3, { x:'0%', duration:0.55, ease:'back.out(1.4)' }, 0.16)
     .to(navLinks, { opacity:1, x:0, duration:0.45, ease:'expo.out', stagger:0.05 }, 0.3)
     .to(blogEls,  { opacity:1, duration:0.35, ease:'power2.out', stagger:0.05 }, 0.4)
+    .call(() => { hamburger.style.mixBlendMode = 'normal'; })
     .to(barTop, { rotation:45, y:14, transformOrigin:'center center', fill:'#252525', duration:0.3, ease:'back.out' }, 0.05)
     .to(barMid, { opacity:0, duration:0.15 }, 0.05)
     .to(barBot, { rotation:-45, y:-14, transformOrigin:'center center', fill:'#252525', duration:0.3, ease:'back.out' }, 0.05);
@@ -439,6 +442,7 @@ function buildCloseTl() {
     .to(blogEls,  { opacity:0, duration:0.1 }, 0)
     .to([panel1,panel2,panel3], { x:'110%', duration:0.45, ease:'power3.in', stagger:{ each:0.06, from:'end' } }, 0)
     .to(navBg, { opacity:0, duration:0.3, ease:'power2.in' }, 0.1)
+    .call(() => { hamburger.style.mixBlendMode = 'difference'; })
     .to(barTop, { rotation:0, y:0, fill:'white', duration:0.2, ease:'power3.in' }, 0)
     .to(barMid, { opacity:1, duration:0.15 }, 0.1)
     .to(barBot, { rotation:0, y:0, fill:'white', duration:0.2, ease:'power3.in' }, 0)
@@ -493,7 +497,7 @@ document.querySelectorAll('a[href]').forEach(a => {
   let mx=window.innerWidth/2, my=window.innerHeight/2, cx=mx, cy=my;
   const LERP=0.18;
   window.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; });
-  const clickables='a, button, [role="button"]';
+  const clickables='a, button, [role="button"], #logo-sticky';
   document.addEventListener('mouseover', e=>{ if(e.target.closest(clickables)) cursor.classList.add('is-hovering'); });
   document.addEventListener('mouseout',  e=>{ if(e.target.closest(clickables)) cursor.classList.remove('is-hovering'); });
   document.addEventListener('mouseleave', ()=>{ cursor.style.opacity='0'; });
