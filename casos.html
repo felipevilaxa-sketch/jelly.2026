@@ -311,6 +311,9 @@ html,body{ width:100%; background:var(--negro); overflow-x:hidden; font-family:'
   opacity:0;
   transform: translateY(40px);
 }
+/* ── PAGE TRANSITION ── */
+body{ opacity:0; transition:opacity 0.45s ease; }
+body.loaded{ opacity:1; }
 </style>
 </head>
 <body>
@@ -326,7 +329,10 @@ html,body{ width:100%; background:var(--negro); overflow-x:hidden; font-family:'
 <!-- Logo sticky (colores originales) -->
 <div id="logo-sticky">
   <svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 505.12 323.7">
-    <defs><style>.cls-1{fill:#fff}.cls-2{fill:#da2229}</style></defs>
+    <defs><style>.cls-1{fill:#fff}.cls-2{fill:#da2229}/* ── PAGE TRANSITION ── */
+body{ opacity:0; transition:opacity 0.45s ease; }
+body.loaded{ opacity:1; }
+</style></defs>
     <g id="Capa_1-2" data-name="Capa 1">
       <path class="cls-2" d="M424.52,10.45c-9.66,0-12.64-2.43-48.15,16.94-35.5,19.37-47.76,26.09-47.76,26.09,0,0-39.22,22.29-79.65-.66-40.43-22.96-68.22-38.74-68.22-38.74,0,0-26.85-14.08-57.05-14.08C80.54,0,0,31.05,0,139.92c0,0-1.79,82.15,91.23,140.94,76.24,48.18,157.72,42.64,157.72,42.64,0,0,92.68,1.04,157.73-42.64,0,0,98.44-57.86,98.44-160.61S434.18,10.45,424.52,10.45"/>
       <path class="cls-2" d="M442.84,277.36c0-2.74.63-5.28,1.9-7.63,1.27-2.34,3.02-4.19,5.27-5.54,2.25-1.35,4.67-2.02,7.27-2.02s5.02.67,7.26,2.02c2.24,1.35,3.99,3.2,5.26,5.54,1.27,2.35,1.9,4.89,1.9,7.63s-.61,5.17-1.83,7.51c-1.22,2.33-2.95,4.21-5.2,5.62-2.25,1.42-4.71,2.13-7.39,2.13s-5.13-.7-7.37-2.11c-2.25-1.4-3.99-3.27-5.22-5.6-1.24-2.33-1.85-4.85-1.85-7.55M445.18,277.35c0,2.33.54,4.49,1.63,6.47,1.09,1.99,2.56,3.54,4.42,4.67,1.87,1.13,3.88,1.69,6.05,1.69s4.21-.57,6.08-1.72c1.87-1.14,3.34-2.7,4.41-4.66,1.06-1.97,1.6-4.11,1.6-6.45s-.53-4.45-1.6-6.41c-1.07-1.96-2.53-3.5-4.41-4.63-1.87-1.13-3.9-1.7-6.08-1.7s-4.19.56-6.06,1.68c-1.87,1.12-3.35,2.66-4.42,4.64-1.08,1.98-1.62,4.12-1.62,6.42M454.3,278.89v6.88h-2.87v-17.27h5.61c2.07,0,3.68.44,4.83,1.33,1.15.89,1.72,2.18,1.72,3.87s-.87,2.94-2.6,3.82c1.65.68,2.49,2.06,2.5,4.15v1.24c0,1.17.11,2.01.34,2.52v.32h-2.95c-.19-.49-.28-1.36-.28-2.61s-.02-2-.06-2.23c-.22-1.3-1.11-1.98-2.66-2.03h-3.58ZM454.3,276.28h3.17c.98-.03,1.76-.26,2.36-.71.59-.45.89-1.03.89-1.76,0-.98-.26-1.68-.79-2.09-.53-.41-1.47-.62-2.83-.62h-2.81v5.19Z"/>
@@ -555,6 +561,22 @@ hamburger.addEventListener('click', () => { if (!isOpen) openMenu(); });
 btnClose.addEventListener('click',  closeMenu);
 navBg.addEventListener('click',     closeMenu);
 document.addEventListener('keydown', e => { if (e.key==='Escape') closeMenu(); });
+
+// Page fade-in
+document.addEventListener('DOMContentLoaded', () => {
+  requestAnimationFrame(() => { document.body.classList.add('loaded'); });
+});
+
+// Page fade-out on navigate
+document.querySelectorAll('a[href]').forEach(a => {
+  const href = a.getAttribute('href');
+  if (!href || href.startsWith('#') || href.startsWith('mailto')) return;
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    document.body.style.opacity = '0';
+    setTimeout(() => { window.location.href = href; }, 380);
+  });
+});
 
 // ── SCROLL REVEAL ──
 document.querySelectorAll('.caso-card.reveal-hidden').forEach((card, i) => {

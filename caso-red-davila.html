@@ -256,6 +256,9 @@ html,body{ width:100%; background:var(--negro); overflow-x:hidden; font-family:'
   transition:opacity .2s;
 }
 .volver-bottom:hover{ opacity:1; }
+/* ── PAGE TRANSITION ── */
+body{ opacity:0; transition:opacity 0.45s ease; }
+body.loaded{ opacity:1; }
 </style>
 </head>
 <body>
@@ -286,6 +289,9 @@ html,body{ width:100%; background:var(--negro); overflow-x:hidden; font-family:'
   transition:opacity .2s;
 }
 .volver-bottom:hover{ opacity:1; }
+/* ── PAGE TRANSITION ── */
+body{ opacity:0; transition:opacity 0.45s ease; }
+body.loaded{ opacity:1; }
 </style></defs>
     <g id="Capa_1-2" data-name="Capa 1">
       <path class="cls-2" d="M424.52,10.45c-9.66,0-12.64-2.43-48.15,16.94-35.5,19.37-47.76,26.09-47.76,26.09,0,0-39.22,22.29-79.65-.66-40.43-22.96-68.22-38.74-68.22-38.74,0,0-26.85-14.08-57.05-14.08C80.54,0,0,31.05,0,139.92c0,0-1.79,82.15,91.23,140.94,76.24,48.18,157.72,42.64,157.72,42.64,0,0,92.68,1.04,157.73-42.64,0,0,98.44-57.86,98.44-160.61S434.18,10.45,424.52,10.45"/>
@@ -457,6 +463,22 @@ document.addEventListener('keydown', e => { if (e.key==='Escape') closeMenu(); }
   }, { passive:true });
   btn.addEventListener('click', () => { window.scrollTo({ top:0, behavior:'smooth' }); });
 })();
+
+// Page fade-in
+document.addEventListener('DOMContentLoaded', () => {
+  requestAnimationFrame(() => { document.body.classList.add('loaded'); });
+});
+
+// Page fade-out on navigate
+document.querySelectorAll('a[href]').forEach(a => {
+  const href = a.getAttribute('href');
+  if (!href || href.startsWith('#') || href.startsWith('mailto')) return;
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    document.body.style.opacity = '0';
+    setTimeout(() => { window.location.href = href; }, 380);
+  });
+});
 
 // Custom cursor
 (function(){
