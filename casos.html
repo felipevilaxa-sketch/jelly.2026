@@ -36,7 +36,8 @@ html,body{ width:100%; background:var(--negro); overflow-x:hidden; font-family:'
   width:80px;
   height:auto;
   opacity:1;
-  pointer-events:none;
+  pointer-events:all;
+  cursor:pointer;
   transition:opacity .3s ease;
 }
 
@@ -557,10 +558,15 @@ function closeMenu() {
   setTimeout(() => { buildCloseTl(); }, 10);
 }
 
-hamburger.addEventListener('click', () => { if (!isOpen) openMenu(); });
-btnClose.addEventListener('click',  closeMenu);
+hamburger.addEventListener('click', () => { if (!isOpen) openMenu(); else closeMenu(); });
 navBg.addEventListener('click',     closeMenu);
 document.addEventListener('keydown', e => { if (e.key==='Escape') closeMenu(); });
+
+// Logo → home
+document.getElementById('logo-sticky').addEventListener('click', () => {
+  document.body.style.opacity='0';
+  setTimeout(()=>{ window.location.href='index.html'; }, 380);
+});
 
 // Page fade-in
 document.addEventListener('DOMContentLoaded', () => {

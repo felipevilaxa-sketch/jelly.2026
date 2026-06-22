@@ -811,18 +811,6 @@ html,body{ width:100%; background:var(--negro); overflow-x:hidden; font-family:'
 </section>
 
 <!-- BTN CLOSE — directo en body, nunca dentro del overlay -->
-<button id="btnClose" style="
-  position:fixed; top:31px; right:56px; z-index:9999;
-  background:none; border:none; cursor:pointer;
-  width:40px; height:40px; padding:8px;
-  display:none; align-items:center; justify-content:center;
-" aria-label="Cerrar menú">
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <line x1="4" y1="4" x2="20" y2="20" stroke="#252525" stroke-width="2" stroke-linecap="round"/>
-    <line x1="20" y1="4" x2="4" y2="20" stroke="#252525" stroke-width="2" stroke-linecap="round"/>
-  </svg>
-</button>
-
 <!-- NAV -->
 <div class="nav-overlay" id="navOverlay">
   <div class="nav-bg" id="navBg"></div>
@@ -900,7 +888,7 @@ const blogEls    = document.querySelectorAll('.blog-content,.blog-header');
 const barTop     = hamburger.querySelector('.bar-top');
 const barMid     = hamburger.querySelector('.bar-mid');
 const barBot     = hamburger.querySelector('.bar-bot');
-const btnClose   = document.getElementById('btnClose');
+const btnClose   = hamburger;
 
 let isOpen = false;
 let tlOpen  = gsap.timeline({ paused: true });
@@ -912,7 +900,6 @@ function buildOpenTl() {
   gsap.set(navLinks, { opacity:0, x:-20 });
   gsap.set(blogEls, { opacity:0 });
   navOverlay.classList.add('open');
-  btnClose.style.display = 'flex';
 
   tlOpen
     .to(navBg,  { opacity:1, duration:0.35, ease:'power2.out' }, 0)
@@ -941,7 +928,6 @@ function buildCloseTl() {
     .to(barBot, { rotation:0, y:0, fill:'white', duration:0.2, ease:'power3.in' }, 0)
     .call(() => {
       navOverlay.classList.remove('open');
-      btnClose.style.display = 'none';
       // Reset completo para próxima apertura
       gsap.set([panel1,panel2,panel3], { clearProps:'all' });
       gsap.set([panel1,panel2,panel3], { x:'110%' });
@@ -964,8 +950,7 @@ function closeMenu() {
   setTimeout(() => { buildCloseTl(); }, 10);
 }
 
-hamburger.addEventListener('click', () => { if (!isOpen) openMenu(); });
-btnClose.addEventListener('click',  closeMenu);
+hamburger.addEventListener('click', () => { if (!isOpen) openMenu(); else closeMenu(); });
 navBg.addEventListener('click',     closeMenu);
 document.addEventListener('keydown', e => { if (e.key==='Escape') closeMenu(); });
 
@@ -1119,12 +1104,10 @@ window.addEventListener('resize', initBento);
   btn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
-  // Ocultar cuando el menú está abierto
+  // Ocultar cuando el menú está abierto / visible al cerrar
   document.getElementById('hamburger').addEventListener('click', () => {
-    btn.classList.add('hidden');
-  });
-  document.getElementById('btnClose').addEventListener('click', () => {
-    btn.classList.remove('hidden');
+    if (!isOpen) btn.classList.add('hidden');
+    else btn.classList.remove('hidden');
   });
 })();
 

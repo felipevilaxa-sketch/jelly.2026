@@ -34,7 +34,8 @@ html,body{ width:100%; background:var(--negro); overflow-x:hidden; font-family:'
   z-index:9997;
   width:80px; height:auto;
   opacity:1;
-  pointer-events:none;
+  pointer-events:all;
+  cursor:pointer;
   transition:opacity .3s ease;
 }
 
@@ -463,6 +464,12 @@ document.addEventListener('keydown', e => { if (e.key==='Escape') closeMenu(); }
   }, { passive:true });
   btn.addEventListener('click', () => { window.scrollTo({ top:0, behavior:'smooth' }); });
 })();
+
+// Logo → home
+document.getElementById('logo-sticky').addEventListener('click', () => {
+  document.body.style.opacity='0';
+  setTimeout(()=>{ window.location.href='index.html'; }, 380);
+});
 
 // Page fade-in
 document.addEventListener('DOMContentLoaded', () => {
