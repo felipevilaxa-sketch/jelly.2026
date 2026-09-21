@@ -1,0 +1,27 @@
+:root{
+/* Base palette — exact values from the Figma variable collection */
+--blue-500:#4D8BFF;
+--blue-soft:#EAF0FF;
+--navy-900:#0B1F3A;
+--gray-500:#6B7280;
+--gray-200:#E3E5E9;
+--gray-150:#E5E5E8;
+--ink-900:#1F1F24;
+--ink-500:#73737A;
+--surface-50:#F7F8FA;
+--white-base:#FFFFFF;
+
+/* Semantic aliases */
+--color-bg-page:var(--white-base);
+--color-bg-surface:var(--surface-50);
+--color-bg-accent:var(--blue-500);
+--color-bg-accent-soft:var(--blue-soft);
+--color-text-primary:var(--navy-900);
+--color-text-secondary:var(--gray-500);
+--color-text-muted:var(--ink-500);
+--color-text-strong:var(--ink-900);
+--color-text-on-accent:var(--white-base);
+--color-border-default:var(--gray-200);
+--color-border-subtle:var(--gray-150);
+--color-border-accent:var(--blue-500);
+}

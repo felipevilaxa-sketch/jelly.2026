@@ -1,0 +1,14 @@
+:root{
+--border-hairline:1px solid var(--color-border-subtle);
+--border-default:1px solid var(--color-border-default);
+--border-ghost:1.5px solid var(--color-border-default);
+/* The system has no drop shadows: depth is expressed with inset hairlines. */
+--ring-inset:inset 0 0 0 1px var(--color-border-subtle);
+--ring-inset-accent:inset 0 0 0 1.5px var(--color-bg-accent);
+--shadow-none:none;
+--ease-standard:cubic-bezier(.2,.6,.2,1); /* @kind other */
+--duration-fast:120ms; /* @kind other */
+--duration-base:180ms; /* @kind other */
+}
+a{color:var(--color-bg-accent);text-decoration:none}
+a:hover{color:var(--color-text-primary)}

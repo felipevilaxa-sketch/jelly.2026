@@ -1,0 +1,1839 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+window.__resources = {
+  "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "assets/vendor/react.production.min.js",
+  "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "assets/vendor/react-dom.production.min.js"
+};
+</script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/tokens/colors.css">
+<link rel="stylesheet" href="_ds/tokens/typography.css">
+<link rel="stylesheet" href="_ds/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/tokens/radius.css">
+<link rel="stylesheet" href="_ds/tokens/borders.css">
+<link rel="stylesheet" href="_ds/figma/fig-tokens.css">
+<link rel="stylesheet" href="_ds/styles.css">
+<script src="_ds/_ds_bundle.js"></script>
+<script src="./image-slot.js"></script>
+<style>
+body{margin:0;background:#FFFFFF;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;scroll-padding-top:96px;overflow-x:clip}
+body{overflow-x:clip}
+a{color:#4D8BFF;text-decoration:none;transition:color 150ms cubic-bezier(.2,.6,.2,1)}
+a:hover{color:#0B1F3A}
+[data-bio-btn]{color:#071527}
+[data-bio-btn]:hover{color:#4D8BFF}
+[data-bio-btn][data-active="true"]{color:#4D8BFF}
+[data-footer-email]{text-decoration:none}
+[data-footer-email]:hover{text-decoration:underline}
+@keyframes fkRise{from{transform:translateY(105%)}to{transform:translateY(0)}}
+@keyframes fkFadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fkMarquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+</style>
+</helmet>
+<div style="background:#FFFFFF;font-family:Inter,sans-serif;color:#0B1F3A">
+
+
+
+
+<header ref="{{ headerRef }}" style="position:fixed;top:0;left:0;right:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(8px)">
+<div style="max-width:1360px;margin:0 auto;padding:16px clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:24px;box-sizing:border-box">
+<a href="#top" style="display:flex;align-items:center;min-height:44px"><img fetchpriority="high" data-header-logo="" src="assets/fika-comms-logo-v2.webp" alt="Fika Comms" style="height:24px;width:auto;align-self:center;display:block;transition:filter 220ms cubic-bezier(.2,.6,.2,1)"></a>
+<nav ref="{{ navRef }}" style="display:flex;align-items:center">
+<a data-header-contact="" href="#contacto" style="font-family:Inter,sans-serif;font-weight:400;font-size:15px;color:#4D8BFF;display:flex;align-items:center;min-height:44px;transition:color 220ms cubic-bezier(.2,.6,.2,1)">contáctanos</a>
+</nav>
+<button ref="{{ headerCtaRef }}" onClick="{{ navContacto }}" style="display:none;align-items:center;justify-content:center;padding:0 20px;height:40px;background:#4D8BFF;border:none;border-radius:4px;cursor:pointer;font-family:Inter,sans-serif;font-weight:600;font-size:14px;color:#FFFFFF">Escríbenos</button>
+</div>
+</header>
+
+
+<main id="top" style="display:flex;flex-direction:column">
+
+<div ref="{{ ringRef }}" style="position:fixed;top:0;left:0;width:36px;height:36px;margin:-18px 0 0 -18px;border-radius:999px;box-shadow:inset 0 0 0 1.5px #4D8BFF;opacity:0;pointer-events:none;z-index:90;transition:opacity 150ms cubic-bezier(.2,.6,.2,1)"></div>
+<div ref="{{ dotRef }}" style="position:fixed;top:0;left:0;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:999px;background:#4D8BFF;opacity:0;pointer-events:none;z-index:91;transition:opacity 150ms cubic-bezier(.2,.6,.2,1)"></div>
+
+<button type="button" ref="{{ backToTopRef }}" onClick="{{ scrollToTop }}" aria-label="Volver al inicio" style="position:fixed;right:24px;bottom:24px;z-index:45;width:48px;height:48px;border-radius:999px;background:#0B1F3A;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity 280ms cubic-bezier(.2,.6,.2,1),transform 280ms cubic-bezier(.2,.6,.2,1)">
+<svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 15.5V5M10 5L5 10M10 5L15 10" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<div ref="{{ sociosBioModalRef }}" role="dialog" aria-modal="true" style="display:none;position:fixed;inset:0;z-index:200;opacity:0;transition:opacity 320ms cubic-bezier(.2,.6,.2,1)">
+<div onClick="{{ closeBio }}" style="position:absolute;inset:0;background:rgba(11,31,58,.45)"></div>
+<div ref="{{ sociosBioModalSheetRef }}" style="position:absolute;left:0;right:0;top:56px;bottom:0;background:#FFFFFF;border-radius:20px 20px 0 0;overflow-y:auto;box-sizing:border-box;padding:24px clamp(20px,5vw,72px) 64px">
+<button type="button" onClick="{{ closeBio }}" aria-label="Cerrar bio" style="position:absolute;right:clamp(20px,5vw,72px);top:24px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;padding:0;cursor:pointer;color:#071527">
+<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L17 17M17 1L1 17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+</button>
+<div style="width:100%;max-width:420px;aspect-ratio:335/300;overflow:hidden;margin-top:64px;background:#E5E5E8">
+<img decoding="async" ref="{{ sociosBioModalPhotoRef }}" src="" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block">
+</div>
+<div style="margin-top:24px;max-width:420px;display:flex;flex-direction:column;gap:4px">
+<p ref="{{ sociosBioModalNameRef }}" style="margin:0;font-family:Inter,sans-serif;font-weight:500;font-size:20px;line-height:1.245;color:#071527"></p>
+<p ref="{{ sociosBioModalRoleRef }}" style="margin:0;font-family:Inter,sans-serif;font-weight:500;font-size:20px;line-height:1.245;color:#071527"></p>
+<p ref="{{ sociosBioModalTaglineRef }}" style="margin:0;font-family:Inter,sans-serif;font-weight:500;font-size:20px;line-height:1.245;color:#4D8BFF"></p>
+</div>
+<div ref="{{ sociosBioModalTextRef }}" style="margin-top:24px;max-width:420px;display:flex;flex-direction:column;gap:16px"></div>
+</div>
+</div>
+
+<div ref="{{ heroWrapRef }}" style="position:relative">
+<section data-screen-label="Hero" ref="{{ heroSectionRef }}" style="max-width:1360px;width:100%;margin:0 auto;box-sizing:border-box;padding:max(96px,clamp(48px,9vw,104px)) clamp(20px,5vw,72px) clamp(56px,8vw,88px);display:flex;flex-direction:column;gap:clamp(28px,4vw,44px);min-height:100vh;justify-content:center;align-items:center;text-align:center;background:#FFFFFF">
+<div ref="{{ quoteHeroRef }}" data-quote-hotspot="" style="position:relative;width:100%;max-width:1239px;aspect-ratio:1239/524.275;cursor:pointer">
+<p ref="{{ qWordSlowRef }}" style="position:absolute;left:0;top:0;margin:0;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(44px,21.5vw,281px);line-height:0.955;letter-spacing:-0.05em;color:#4D8BFF;white-space:nowrap;opacity:0;transform:translateY(56px);transition:opacity 720ms cubic-bezier(.2,.6,.2,1),transform 720ms cubic-bezier(.2,.6,.2,1)">slow</p>
+<p ref="{{ qWordIsSmoothRef }}" style="position:absolute;left:52.82%;top:32.55%;margin:0;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(12px,5.4vw,71px);line-height:0.842;letter-spacing:-0.05em;color:#0B1F3A;white-space:nowrap;opacity:0;transform:translateY(40px);transition:opacity 640ms cubic-bezier(.2,.6,.2,1),transform 640ms cubic-bezier(.2,.6,.2,1)">is smooth</p>
+<p ref="{{ qWordSmoothRef }}" style="position:absolute;left:14.6%;top:39.3%;margin:0;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(44px,21.5vw,281px);line-height:0.955;letter-spacing:-0.05em;color:#4D8BFF;white-space:nowrap;opacity:0;transform:translateY(56px);transition:opacity 720ms cubic-bezier(.2,.6,.2,1),transform 720ms cubic-bezier(.2,.6,.2,1)">smooth</p>
+<p ref="{{ qWordIsFastRef }}" style="position:absolute;left:15.2%;top:88.56%;margin:0;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(12px,5.4vw,71px);line-height:0.842;letter-spacing:-0.05em;color:#0B1F3A;white-space:nowrap;opacity:0;transform:translateY(40px);transition:opacity 640ms cubic-bezier(.2,.6,.2,1),transform 640ms cubic-bezier(.2,.6,.2,1)">is fast</p>
+<div ref="{{ quoteTooltipRef }}" style="position:absolute;right:0;bottom:-12px;background:#0B1F3A;color:#FFFFFF;font-family:Inter,sans-serif;font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;padding:8px 16px;border-radius:4px;opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity 220ms cubic-bezier(.2,.6,.2,1),transform 220ms cubic-bezier(.2,.6,.2,1);white-space:nowrap">Sonny Hayes, F1</div>
+</div>
+</section>
+
+<section id="quienes-somos" data-screen-label="Quiénes somos" ref="{{ quienesRef }}" style="position:relative;min-height:100vh;background:#0B1F3A;overflow:hidden;display:flex;align-items:center">
+<div ref="{{ quienesContentRef }}" style="position:relative;width:100%;max-width:1360px;margin:0 auto;box-sizing:border-box;padding:max(96px,clamp(48px,7vw,88px)) clamp(20px,5vw,72px)">
+<h2 ref="{{ quienesHeadingRef }}" style="margin:0;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(56px,17vw,300px);line-height:0.95;letter-spacing:0;color:#FFFFFF"><span ref="{{ quienesSomosRef }}" style="display:inline-block">somos</span><br><span ref="{{ quienesFikaRef }}" style="color:#4D8BFF">fika</span><br><span ref="{{ quienesCommsRef }}" style="display:inline-block">comms</span></h2>
+<div ref="{{ quienesSlide1Ref }}" style="max-width:640px;margin-top:clamp(24px,4vw,48px);display:flex;flex-direction:column;gap:20px">
+<p style="margin:0;font-family:Sora,sans-serif;font-weight:200;font-size:clamp(28px,4.4vw,58px);line-height:1.185;color:#FFFFFF">Una agencia boutique<br>y 100% híbrida.</p>
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:300;font-size:16px;line-height:1.556;color:#EAF0FF">Relacionamiento, PR y reputación, desde un lado. Desde el otro, estrategia digital, contenidos, creatividad y redes sociales.</p>
+</div>
+<div ref="{{ quienesSlide2Ref }}" style="max-width:640px;margin-top:24px;display:flex;flex-direction:column;gap:20px">
+<p style="margin:0;font-family:Sora,sans-serif;font-weight:200;font-size:clamp(28px,4.4vw,58px);line-height:1.185;color:#FFFFFF">Somos 100% agnósticos.</p>
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:300;font-size:16px;line-height:1.556;color:#EAF0FF;text-wrap:pretty">No llegamos con soluciones preconcebidas. Diagnosticamos primero para entender cuál es el mejor camino para resolver el problema.</p>
+</div>
+</div>
+</section>
+</div>
+
+<div ref="{{ comoWrapRef }}" style="position:relative">
+<section id="por-que" data-screen-label="Por qué Fika Comms" ref="{{ porQueSectionRef }}" style="background:#FFFFFF;box-sizing:border-box;min-height:100vh;display:flex;align-items:center;padding:max(96px,clamp(56px,8vw,104px)) clamp(20px,5vw,72px) clamp(56px,8vw,104px)">
+<div style="width:100%;max-width:1360px;margin:0 auto">
+<div ref="{{ porQueWrapRef }}" style="position:relative;width:100%">
+<div ref="{{ porQuePhotoRef }}" style="width:60.912%;aspect-ratio:967.333/725.5;overflow:hidden;position:relative;opacity:0;transform:translateY(28px)">
+<img loading="lazy" decoding="async" src="assets/por-que-foto-completa.webp" alt="Dos tazas de café sobre una mesa" style="width:100%;height:100%;object-fit:cover;display:block">
+</div>
+<div ref="{{ porQueTitleRef }}" style="position:absolute;left:21.726%;top:1.028%;width:78.274%;opacity:0;transform:translateY(28px)">
+<h2 style="margin:0;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(36px,13.5vw,165px);line-height:0.955;letter-spacing:0;color:#4D8BFF">
+<span ref="{{ porQueLine1Ref }}" style="display:block;text-align:right">por qué</span><span ref="{{ porQueLine2Ref }}" style="display:inline;text-align:left">fika </span><span ref="{{ porQueLine3Ref }}" style="display:inline;text-align:left">comms</span>
+</h2>
+</div>
+<div ref="{{ porQueDescRef }}" style="position:absolute;left:calc(60.912% + clamp(20px,3vw,40px));right:0;top:44.659%;box-sizing:border-box;display:flex;flex-direction:column;gap:clamp(16px,2vw,24px);opacity:0;transform:translateY(28px)">
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:400;font-size:16px;line-height:1.556;color:#0B1F3A">Fika es la palabra sueca para la pausa ideal para tomar un café. Ese momento necesario para frenar, pensar y resolver y luego acelerar en medio del caos de un mundo saturado de contenidos.</p>
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:400;font-size:16px;line-height:1.556;color:#0B1F3A">Somos Fika Comms porque en torno a ese freno, siempre con un café en la mano, nos sentamos a tomar grandes decisiones antes de volver a pisar el acelerador.</p>
+</div>
+<div ref="{{ porQueCupRef }}" style="position:absolute;left:14.60%;top:40.52%;width:33.15%;height:59.39%;overflow:hidden;pointer-events:none;opacity:0;transform:translateY(28px)">
+<img loading="lazy" decoding="async" src="assets/por-que-taza-recorte.webp" alt="" style="width:100%;height:100%;object-fit:cover;display:block">
+</div>
+</div>
+</div>
+</section>
+
+<section id="como-trabajamos" data-screen-label="Cómo trabajamos" ref="{{ comoRef }}" style="position:relative;min-height:100vh;background:#0B1F3A;overflow:hidden;display:flex;align-items:center">
+<div ref="{{ comoContentRef }}" style="position:relative;width:100%;max-width:1360px;margin:0 auto;box-sizing:border-box;padding:max(96px,clamp(48px,7vw,88px)) clamp(20px,5vw,72px)">
+<div ref="{{ comoSlideWrapRef }}" style="position:relative">
+<div ref="{{ comoSlideARef }}" style="position:relative">
+<div ref="{{ comoLeftARef }}" style="position:relative">
+<p style="margin:0;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(20px,2.38vw,45px);line-height:0.955;color:#4D8BFF">somos híbridos</p>
+<p style="margin:clamp(12px,2vw,28px) 0 0;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(56px,17vw,300px);line-height:0.95;letter-spacing:0;color:#F5F7FA">de</p>
+<div ref="{{ comoParaARef }}" style="position:absolute;top:100%;left:0;max-width:600px;box-sizing:border-box">
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:300;font-size:16px;line-height:1.556;color:#EAF0FF;text-wrap:pretty">Con dos asesores con backgrounds 100% distintos -y complementarios-, dependiendo del problema, combinamos lo mejor del mundo de comunicaciones estratégicas para stakeholders clave con todo lo que viene de digital, que mezcla redes sociales y contenidos y creatividad. Necesitamos un café para tomar los inputs y transformarlos en un brief y en una mirada de futuro.</p>
+</div>
+</div>
+<p ref="{{ comoRightARef }}" style="margin:0;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(56px,17vw,300px);line-height:0.95;letter-spacing:0;color:#F5F7FA">verdad.</p>
+</div>
+<div ref="{{ comoSlideBRef }}" style="position:relative;margin-top:24px">
+<div ref="{{ comoLeftBRef }}" style="position:relative">
+<p style="margin:0;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(20px,2.38vw,45px);line-height:0.955;color:#4D8BFF">boutique</p>
+<p style="margin:clamp(12px,2vw,28px) 0 0;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(56px,17vw,300px);line-height:0.95;letter-spacing:0;color:#F5F7FA">para</p>
+<div ref="{{ comoParaBRef }}" style="position:absolute;top:100%;left:0;max-width:320px;box-sizing:border-box">
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:300;font-size:16px;line-height:1.556;color:#EAF0FF;text-wrap:pretty">Equipo pequeño y senior. El mismo equipo que se sienta con los clientes es el que presenta a los potenciales. Y tenemos un máximo de clientes simultáneos. Porque no podemos clonarnos. Todavía.</p>
+</div>
+</div>
+<p ref="{{ comoRightBRef }}" style="margin:0;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(56px,17vw,300px);line-height:0.95;letter-spacing:0;color:#F5F7FA">siempre.</p>
+</div>
+</div>
+</div>
+</section>
+
+</div>
+
+<section id="socios" data-screen-label="Socios" ref="{{ sociosRef }}" style="position:relative;background:#FFFFFF;box-sizing:border-box;min-height:100vh;overflow:hidden;padding:max(96px,clamp(48px,7vw,88px)) clamp(20px,5vw,72px) clamp(56px,7vw,88px);display:flex;flex-direction:column;justify-content:center">
+<div style="position:relative;width:100%;max-width:1360px;margin:0 auto">
+<div ref="{{ sociosWrapRef }}" style="position:relative;width:100%;aspect-ratio:1440/960">
+
+<div ref="{{ sociosPhotoBoxRef }}" style="position:absolute;left:21.14%;top:23.66%;width:77.19%;height:65.17%;overflow:hidden;opacity:0;transform:translateY(28px);transition:opacity 640ms cubic-bezier(.2,.6,.2,1),transform 640ms cubic-bezier(.2,.6,.2,1),left 720ms cubic-bezier(.2,.6,.2,1),top 720ms cubic-bezier(.2,.6,.2,1),width 720ms cubic-bezier(.2,.6,.2,1),height 720ms cubic-bezier(.2,.6,.2,1)">
+<img loading="lazy" decoding="async" ref="{{ sociosPhotoImgRef }}" src="assets/socios-foto-completa.webp" alt="Denise y Manu, socios de Fika Comms" style="position:absolute;top:0;left:0;max-width:none;display:block;transition:left 720ms cubic-bezier(.2,.6,.2,1)">
+</div>
+
+<h2 ref="{{ sociosHeadingRef }}" style="position:absolute;left:0;top:4.27%;width:63.5%;margin:0;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(40px,30vw,432px);line-height:0.688;letter-spacing:-0.04em;color:#4D8BFF;opacity:0;transform:translateY(28px);transition:opacity 560ms cubic-bezier(.2,.6,.2,1),transform 560ms cubic-bezier(.2,.6,.2,1)">
+<span style="display:block">aseso</span><span style="display:block">res</span>
+</h2>
+
+<div ref="{{ sociosCutoutBoxRef }}" style="position:absolute;left:21.14%;top:23.66%;width:77.19%;height:65.17%;overflow:hidden;pointer-events:none;opacity:0;transform:translateY(28px);transition:opacity 480ms cubic-bezier(.2,.6,.2,1),transform 640ms cubic-bezier(.2,.6,.2,1),left 720ms cubic-bezier(.2,.6,.2,1),top 720ms cubic-bezier(.2,.6,.2,1),width 720ms cubic-bezier(.2,.6,.2,1),height 720ms cubic-bezier(.2,.6,.2,1)">
+<img loading="lazy" decoding="async" ref="{{ sociosCutoutImgRef }}" src="assets/socios-foto-recorte.webp" alt="" style="position:absolute;top:0;left:0;max-width:none;display:block;transition:left 720ms cubic-bezier(.2,.6,.2,1)">
+</div>
+
+<div ref="{{ sociosBioPhotoBoxRef }}" style="position:absolute;left:21.14%;top:23.66%;width:77.19%;height:65.17%;overflow:hidden;pointer-events:none;opacity:0;transition:opacity 480ms cubic-bezier(.2,.6,.2,1),left 720ms cubic-bezier(.2,.6,.2,1),top 720ms cubic-bezier(.2,.6,.2,1),width 720ms cubic-bezier(.2,.6,.2,1),height 720ms cubic-bezier(.2,.6,.2,1)">
+<img loading="lazy" decoding="async" ref="{{ sociosBioPhotoDeniseRef }}" src="assets/bio-denise.webp" alt="Denise Humphreys" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity 480ms cubic-bezier(.2,.6,.2,1)">
+<img loading="lazy" decoding="async" ref="{{ sociosBioPhotoManuRef }}" src="assets/bio-manu.webp" alt="Manu Chatlani" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity 480ms cubic-bezier(.2,.6,.2,1)">
+</div>
+
+<div ref="{{ sociosNombresRef }}" style="position:absolute;left:21.14%;top:23.66%;width:77.19%;height:65.17%;pointer-events:none;opacity:0;transform:translateY(28px);transition:opacity 400ms cubic-bezier(.2,.6,.2,1),transform 640ms cubic-bezier(.2,.6,.2,1)">
+<div style="position:absolute;left:3.56%;top:84.07%">
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:400;font-size:16px;line-height:1.556;color:#F5F7FA">Denise Humphreys.</p>
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:800;font-size:16px;line-height:1.556;color:#F5F7FA">Ama el capuchino.</p>
+</div>
+<div style="position:absolute;left:82.64%;top:50%">
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:400;font-size:16px;line-height:1.556;color:#F5F7FA">Manu Chatlani</p>
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:800;font-size:16px;line-height:1.556;color:#F5F7FA">Adicto al espresso<br>y al macchiato.</p>
+</div>
+</div>
+
+<a href="#" ref="{{ sociosCloseBioRef }}" onClick="{{ closeBio }}" style="position:absolute;right:1.67%;top:17.71%;font-family:Inter,sans-serif;font-weight:400;font-size:15px;color:#071527;opacity:0;pointer-events:none;transition:opacity 400ms cubic-bezier(.2,.6,.2,1)">Cerrar Bio</a>
+
+<div style="position:absolute;left:16.875%;top:32.29%;width:23.96%;box-sizing:border-box;display:flex;flex-direction:column;gap:4px;opacity:0;transform:translateY(28px);pointer-events:none" ref="{{ sociosBioNameDeniseRef }}">
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:500;font-size:20px;line-height:1.245;color:#071527">Denise Humphreys.</p>
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:500;font-size:20px;line-height:1.245;color:#071527">Fundadora y directora ejecutiva.</p>
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:500;font-size:20px;line-height:1.245;color:#4D8BFF">Periodista. Confiesa amar el capuchino.</p>
+</div>
+<div style="position:absolute;left:16.875%;top:43.85%;width:38.89%;box-sizing:border-box;display:flex;flex-direction:column;gap:clamp(12px,1.5vw,20px);opacity:0;transform:translateY(28px);pointer-events:none" ref="{{ sociosBioTextDeniseRef }}">
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:400;font-size:16px;line-height:1.556;color:#071527">20 años diseñando y liderando estrategias de comunicación corporativa y reputación en sectores regulados y de alto impacto público: energía, educación, finanzas, infraestructura y transporte.</p>
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:400;font-size:16px;line-height:1.556;color:#071527">Cuenta con una trayectoria que mezcla medios, agencias internacionales y mundo gremial. Eso le da una visión de 360°.</p>
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:400;font-size:16px;line-height:1.556;color:#071527">Entre otros, trabajó en La Segunda, fue directora de cuentas en Hill &amp; Knowlton Captiva, Gerenta de Comunicaciones de la Asociación de Generadoras de Chile y Gerente General de Burson en Chile.</p>
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:400;font-size:16px;line-height:1.556;color:#071527">Ha asesorado a organizaciones y empresas como Amcham, American Airlines, BICE Inversiones, Cámara Franco-Chilena de Comercio, Delta Air Lines, DUOC UC, FedEx, Grupo Saesa, Mastercard, Maersk y Pfizer, entre otras.</p>
+</div>
+
+<div style="position:absolute;left:16.875%;top:32.29%;width:23.96%;box-sizing:border-box;display:flex;flex-direction:column;gap:4px;opacity:0;transform:translateY(28px);pointer-events:none" ref="{{ sociosBioNameManuRef }}">
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:500;font-size:20px;line-height:1.245;color:#071527">Manu Chatlani.</p>
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:500;font-size:20px;line-height:1.245;color:#071527">Director de estrategia.</p>
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:500;font-size:20px;line-height:1.245;color:#4D8BFF">Periodista. Adicto al espresso y al macchiato.</p>
+</div>
+<div style="position:absolute;left:16.875%;top:43.85%;width:38.89%;box-sizing:border-box;display:flex;flex-direction:column;gap:clamp(12px,1.5vw,20px);opacity:0;transform:translateY(28px);pointer-events:none" ref="{{ sociosBioTextManuRef }}">
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:400;font-size:16px;line-height:1.556;color:#071527">Founder y ex director ejecutivo de Jelly. En 16 años asesoró a marcas como Sony Music Chile, CGE, Liquimax, Clínica Santa María, VTR, Google, Mallplaza e Itaú, entre otras.</p>
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:400;font-size:16px;line-height:1.556;color:#071527">Es panelista en Radio Concierto, columnista en El Dínamo y consejero en ChileMujeres.</p>
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:400;font-size:16px;line-height:1.556;color:#071527">Fue nominado tres veces al premio Marketing Best como mejor CEO de Agencia de Publicidad, distinción que obtuvo en 2022.</p>
+</div>
+
+</div>
+
+<div ref="{{ sociosBtnRowRef }}" style="position:absolute;right:1.67%;display:flex;gap:clamp(24px,3vw,48px)">
+<a href="#" data-bio-btn="" data-active="{{ isDeniseBioOpen }}" onClick="{{ toggleDeniseBio }}" style="font-family:Inter,sans-serif;font-weight:400;font-size:15px;transition:color 220ms cubic-bezier(.2,.6,.2,1)">Bio de Denise</a>
+<a href="#" data-bio-btn="" data-active="{{ isManuBioOpen }}" onClick="{{ toggleManuBio }}" style="font-family:Inter,sans-serif;font-weight:400;font-size:15px;transition:color 220ms cubic-bezier(.2,.6,.2,1)">Bio de Manu</a>
+</div>
+
+<div ref="{{ sociosMobileRef }}" style="display:none;flex-direction:column;width:100%;opacity:0;transform:translateY(28px);transition:opacity 640ms cubic-bezier(.2,.6,.2,1),transform 640ms cubic-bezier(.2,.6,.2,1)">
+<h2 style="position:relative;z-index:2;margin:0 0 -40px;text-align:left;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(56px,20vw,120px);line-height:0.85;letter-spacing:-0.04em;color:#4D8BFF">
+<span style="display:block">aseso</span><span style="display:block">res.</span>
+</h2>
+<div style="position:relative;width:100%;aspect-ratio:335/380;overflow:hidden">
+<img loading="lazy" decoding="async" src="assets/socios-foto-completa-mobile.webp" alt="Denise y Manu, socios de Fika Comms" style="width:100%;height:100%;object-fit:cover;object-position:62% center;display:block">
+</div>
+<div style="display:flex;flex-direction:column;gap:24px;margin-top:24px">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:16px">
+<div>
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:400;font-size:16px;line-height:1.556;color:#071527">Denise Humphreys.</p>
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:800;font-size:16px;line-height:1.556;color:#071527">Ama el capuchino.</p>
+</div>
+<a href="#" onClick="{{ toggleDeniseBio }}" style="flex:none;display:flex;align-items:center;justify-content:center;padding:12px 24px;border:1px solid #071527;border-radius:4px;font-family:Inter,sans-serif;font-weight:500;font-size:14px;color:#071527">Ver Bio</a>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;gap:16px">
+<div>
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:400;font-size:16px;line-height:1.556;color:#071527">Manu Chatlani</p>
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:800;font-size:16px;line-height:1.556;color:#071527">Adicto al espresso<br>y al macchiato.</p>
+</div>
+<a href="#" onClick="{{ toggleManuBio }}" style="flex:none;display:flex;align-items:center;justify-content:center;padding:12px 24px;border:1px solid #071527;border-radius:4px;font-family:Inter,sans-serif;font-weight:500;font-size:14px;color:#071527">Ver Bio</a>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<section id="contacto" data-screen-label="Escríbenos" style="position:relative;background:#4D8BFF;box-sizing:border-box;min-height:100vh;overflow:hidden;padding:max(96px,clamp(48px,7vw,88px)) clamp(20px,5vw,72px) clamp(56px,7vw,88px);display:flex;align-items:center">
+<div style="position:relative;width:100%;max-width:1360px;margin:0 auto">
+<div ref="{{ footerWrapRef }}" style="position:relative;width:100%;aspect-ratio:1889/856">
+
+<h2 ref="{{ footerHeadingRef }}" data-reveal style="position:absolute;left:24.08%;top:11.45%;width:80.36%;margin:0;text-align:right;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(56px,23vw,432px);line-height:0.688;letter-spacing:-0.04em;color:#F5F7FA"><span style="display:block">hable</span><span style="display:block">mos.</span></h2>
+
+<div data-reveal style="position:absolute;left:calc(22.5% - 60px);top:53.6%;display:flex;align-items:center;gap:16px">
+<button type="button" ref="{{ copyEmailBtnRef }}" onClick="{{ copyEmail }}" aria-label="Copiar correo al portapapeles" style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;flex:none;background:transparent;border:none;padding:0;cursor:pointer;color:#0B1F3A">
+<sc-if value="{{ emailCopied }}" hint-placeholder-val="{{ false }}">
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</sc-if>
+<sc-if value="{{ emailNotCopied }}" hint-placeholder-val="{{ true }}">
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="7" y="7" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M4.5 13H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+</sc-if>
+</button>
+<a ref="{{ footerEmailRef }}" href="mailto:hola@fikacomms.cl" data-footer-email="" style="font-family:Sora,sans-serif;font-weight:800;font-size:clamp(28px,2.6vw,50px);line-height:0.688;letter-spacing:-0.04em;color:#0B1F3A">hola@fikacomms.cl</a>
+</div>
+
+<div ref="{{ footerSocialRef }}" data-reveal style="position:absolute;left:37.11%;top:62.85%;display:flex;gap:19px">
+<a href="https://www.linkedin.com/company/fikacomms/" target="_blank" rel="noopener noreferrer" style="font-family:Inter,sans-serif;font-weight:500;font-size:20px;color:#071527">Linkedin</a>
+<a href="https://www.instagram.com/fikacomms/" target="_blank" rel="noopener noreferrer" style="font-family:Inter,sans-serif;font-weight:500;font-size:20px;color:#071527">Instagram</a>
+</div>
+
+</div>
+
+<div ref="{{ footerMobileRef }}" style="display:none;flex-direction:column;width:100%">
+<h2 data-reveal style="margin:0 0 32px;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(56px,26vw,160px);line-height:0.85;letter-spacing:-0.04em;color:#F5F7FA">
+<span style="display:block">hable</span><span style="display:block">mos.</span>
+</h2>
+<a href="mailto:hola@fikacomms.cl" data-reveal style="font-family:Sora,sans-serif;font-weight:800;font-size:clamp(24px,7.5vw,34px);letter-spacing:-0.02em;color:#0B1F3A;text-decoration:underline">hola@fikacomms.cl</a>
+<div data-reveal style="display:flex;gap:16px;margin-top:28px">
+<a href="https://www.linkedin.com/company/fikacomms/" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;justify-content:center;padding:12px 24px;border:1px solid #071527;border-radius:4px;font-family:Inter,sans-serif;font-weight:500;font-size:14px;color:#071527">Linkedin</a>
+<a href="https://www.instagram.com/fikacomms/" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;justify-content:center;padding:12px 24px;border:1px solid #071527;border-radius:4px;font-family:Inter,sans-serif;font-weight:500;font-size:14px;color:#071527">Instagram</a>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<div style="background:#0B1F3A;box-sizing:border-box;padding:12px clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:center">
+<p style="margin:0;font-family:Inter,sans-serif;font-weight:500;font-size:clamp(12px,1.5vw,14px);color:#F5F7FA">Santiago, Chile. 2026</p>
+</div>
+
+</main>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { activeBio: null, emailCopied: false };
+
+  constructor(props) {
+    super(props);
+    this.dotRef = React.createRef();
+    this.ringRef = React.createRef();
+    this.backToTopRef = React.createRef();
+    this.headerRef = React.createRef();
+    this.navRef = React.createRef();
+    this.headerCtaRef = React.createRef();
+    this.quoteHeroRef = React.createRef();
+    this.qWordSlowRef = React.createRef();
+    this.qWordIsSmoothRef = React.createRef();
+    this.qWordSmoothRef = React.createRef();
+    this.qWordIsFastRef = React.createRef();
+    this.quoteTooltipRef = React.createRef();
+    this.heroWrapRef = React.createRef();
+    this.heroSectionRef = React.createRef();
+    this.quienesRef = React.createRef();
+    this.quienesContentRef = React.createRef();
+    this.quienesHeadingRef = React.createRef();
+    this.quienesSomosRef = React.createRef();
+    this.quienesFikaRef = React.createRef();
+    this.quienesCommsRef = React.createRef();
+    this.quienesSlide1Ref = React.createRef();
+    this.quienesSlide2Ref = React.createRef();
+    this.porQueSectionRef = React.createRef();
+    this.porQueWrapRef = React.createRef();
+    this.porQuePhotoRef = React.createRef();
+    this.porQueTitleRef = React.createRef();
+    this.porQueLine1Ref = React.createRef();
+    this.porQueLine2Ref = React.createRef();
+    this.porQueLine3Ref = React.createRef();
+    this.porQueDescRef = React.createRef();
+    this.porQueCupRef = React.createRef();
+    this.comoWrapRef = React.createRef();
+    this.comoRef = React.createRef();
+    this.comoContentRef = React.createRef();
+    this.comoSlideWrapRef = React.createRef();
+    this.comoSlideARef = React.createRef();
+    this.comoSlideBRef = React.createRef();
+    this.comoLeftARef = React.createRef();
+    this.comoRightARef = React.createRef();
+    this.comoLeftBRef = React.createRef();
+    this.comoRightBRef = React.createRef();
+    this.comoParaARef = React.createRef();
+    this.comoParaBRef = React.createRef();
+    this.sociosRef = React.createRef();
+    this.sociosWrapRef = React.createRef();
+    this.sociosPhotoBoxRef = React.createRef();
+    this.sociosPhotoImgRef = React.createRef();
+    this.sociosCutoutBoxRef = React.createRef();
+    this.sociosCutoutImgRef = React.createRef();
+    this.sociosBioPhotoBoxRef = React.createRef();
+    this.sociosBioPhotoDeniseRef = React.createRef();
+    this.sociosBioPhotoManuRef = React.createRef();
+    this.sociosNombresRef = React.createRef();
+    this.sociosHeadingRef = React.createRef();
+    this.sociosBioNameDeniseRef = React.createRef();
+    this.sociosBioTextDeniseRef = React.createRef();
+    this.sociosBioNameManuRef = React.createRef();
+    this.sociosBioTextManuRef = React.createRef();
+    this.sociosCloseBioRef = React.createRef();
+    this.sociosBtnRowRef = React.createRef();
+    this.sociosMobileRef = React.createRef();
+    this.sociosBioModalRef = React.createRef();
+    this.sociosBioModalSheetRef = React.createRef();
+    this.sociosBioModalPhotoRef = React.createRef();
+    this.sociosBioModalNameRef = React.createRef();
+    this.sociosBioModalRoleRef = React.createRef();
+    this.sociosBioModalTaglineRef = React.createRef();
+    this.sociosBioModalTextRef = React.createRef();
+    this.copyEmailBtnRef = React.createRef();
+    this.footerWrapRef = React.createRef();
+    this.footerMobileRef = React.createRef();
+    this.footerHeadingRef = React.createRef();
+    this.footerEmailRef = React.createRef();
+    this.footerSocialRef = React.createRef();
+    this.navContacto = (e) => {
+      if (e && e.preventDefault) e.preventDefault();
+      const el = document.getElementById('contacto');
+      if (el) el.scrollIntoView({ behavior: this.reduced ? 'auto' : 'smooth', block: 'start' });
+    };
+    this.setBio = (who) => (e) => {
+      if (e && e.preventDefault) e.preventDefault();
+      const next = this.state.activeBio === who ? null : who;
+      this.setState({ activeBio: next });
+      this.applyBioLayout(next);
+    };
+    this.toggleDeniseBio = this.setBio('denise');
+    this.toggleManuBio = this.setBio('manu');
+    this.closeBio = (e) => {
+      if (e && e.preventDefault) e.preventDefault();
+      this.setState({ activeBio: null });
+      this.applyBioLayout(null);
+    };
+    this.scrollToTop = () => {
+      window.scrollTo({ top: 0, behavior: this.reduced ? 'auto' : 'smooth' });
+    };
+    this.copyEmail = () => {
+      const email = 'hola@fikacomms.cl';
+      const showCopied = () => {
+        this.setState({ emailCopied: true });
+        if (this.emailCopiedTimer) clearTimeout(this.emailCopiedTimer);
+        this.emailCopiedTimer = setTimeout(() => this.setState({ emailCopied: false }), 1800);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(showCopied).catch(() => {});
+      }
+    };
+    this.applyResponsive = () => {
+      const mobile = window.innerWidth < 900;
+      if (this.navRef.current) this.navRef.current.style.display = mobile ? 'none' : 'flex';
+      if (this.headerCtaRef.current) this.headerCtaRef.current.style.display = mobile ? 'inline-flex' : 'none';
+      // Founders: desktop keeps its pan/crop wrap + inline "Bio de X" links; mobile shows
+      // the plain photo + "Ver Bio" rows instead, and bio taps open the fixed full-screen
+      // modal (see applyBioLayout) rather than swapping the crop window in place.
+      if (this.sociosWrapRef.current) this.sociosWrapRef.current.style.display = mobile ? 'none' : 'block';
+      if (this.sociosBtnRowRef.current) this.sociosBtnRowRef.current.style.display = mobile ? 'none' : 'flex';
+      if (this.sociosMobileRef.current) this.sociosMobileRef.current.style.display = mobile ? 'flex' : 'none';
+      // Footer: desktop keeps its percentage-positioned wrap (scaled by initFooterScale);
+      // mobile shows the plain stacked block instead, matching the client reference.
+      if (this.footerWrapRef.current) this.footerWrapRef.current.style.display = mobile ? 'none' : 'block';
+      if (this.footerMobileRef.current) this.footerMobileRef.current.style.display = mobile ? 'flex' : 'none';
+      // Body scroll-lock while the bio modal is open is handled directly in
+      // applyMobileBioModal (needs the exact scrollY to freeze/restore, not just an
+      // overflow toggle), not here.
+    };
+    // Mobile-only Hero quote composition (client-supplied reference): "slow"/"smooth" fit
+    // the phone width instead of overflowing it, and the attribution badge — which on
+    // desktop only reveals on hover/tap — sits permanently visible bottom-right instead,
+    // since mobile has no hover to trigger it. Desktop keeps its exact original values
+    // (restored verbatim below), untouched.
+    this.applyHeroQuoteLayout = () => {
+      const hotspot = this.quoteHeroRef.current;
+      const slow = this.qWordSlowRef.current, isSmooth = this.qWordIsSmoothRef.current;
+      const smooth = this.qWordSmoothRef.current, isFast = this.qWordIsFastRef.current;
+      const tip = this.quoteTooltipRef.current;
+      if (!hotspot || !slow || !isSmooth || !smooth || !isFast || !tip) return;
+      if (window.innerWidth < 900) {
+        hotspot.style.aspectRatio = 'auto';
+        slow.style.left = '3%'; slow.style.top = '10px'; slow.style.fontSize = 'clamp(44px,22.5vw,185px)';
+        smooth.style.left = '4%'; smooth.style.fontSize = 'clamp(44px,22.5vw,185px)';
+        isFast.style.left = '4%'; isFast.style.fontSize = 'clamp(18px,8vw,66px)';
+        isSmooth.style.left = 'auto'; isSmooth.style.right = '4%'; isSmooth.style.fontSize = 'clamp(18px,8vw,66px)';
+        tip.style.left = 'auto'; tip.style.right = '4%'; tip.style.bottom = 'auto';
+        tip.style.opacity = '1'; tip.style.transform = 'translateY(0)'; tip.style.pointerEvents = 'none';
+        // Every row is placed from the ACTUAL measured bottom of the row before it, plus
+        // one consistent gap — the same gap "smooth" already sits above "is fast" with —
+        // instead of guessed percentages that drift apart the moment any one word's size
+        // changes. This is what keeps "is smooth" the same distance from "slow" as "is
+        // fast" is from "smooth", and guarantees no row ever overlaps the next.
+        // offsetTop/offsetHeight (not getBoundingClientRect) on purpose — this runs before
+        // the entrance fade+rise settles, while these words still carry their initial
+        // translateY() offset, which getBoundingClientRect would bake into the measurement.
+        // offsetTop is a pure layout value, untouched by that transform.
+        const GAP = 6.5;
+        const bottomOf = (el) => el.offsetTop + el.offsetHeight;
+        isSmooth.style.top = Math.round(bottomOf(slow) + GAP) + 'px';
+        smooth.style.top = Math.round(bottomOf(isSmooth) + GAP) + 'px';
+        isFast.style.top = Math.round(bottomOf(smooth) + GAP) + 'px';
+        tip.style.top = isFast.style.top;
+        hotspot.style.height = Math.round(bottomOf(isFast) + 16) + 'px';
+      } else {
+        hotspot.style.aspectRatio = '1239/524.275';
+        hotspot.style.height = 'auto';
+        slow.style.left = '0'; slow.style.top = '0'; slow.style.fontSize = 'clamp(44px,21.5vw,281px)';
+        isSmooth.style.left = '52.82%'; isSmooth.style.right = 'auto'; isSmooth.style.top = '32.55%'; isSmooth.style.fontSize = 'clamp(12px,5.4vw,71px)';
+        smooth.style.left = '14.6%'; smooth.style.top = '39.3%'; smooth.style.fontSize = 'clamp(44px,21.5vw,281px)';
+        isFast.style.left = '15.2%'; isFast.style.top = '88.56%'; isFast.style.fontSize = 'clamp(12px,5.4vw,71px)';
+        tip.style.left = 'auto'; tip.style.right = '0'; tip.style.bottom = '-12px'; tip.style.top = 'auto';
+        tip.style.opacity = '0'; tip.style.transform = 'translateY(8px)'; tip.style.pointerEvents = 'none';
+      }
+    };
+  }
+
+  componentDidMount() {
+    this.reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+    this.applyResponsive();
+    window.addEventListener('resize', this.applyResponsive);
+    this.applyHeroQuoteLayout();
+    window.addEventListener('resize', this.applyHeroQuoteLayout);
+    if (this.fine) this.initCursor();
+    if (!this.reduced) this.initReveal();
+    this.initQuoteIntro();
+    this.initQuoteTooltip();
+    this.initHeaderScroll();
+    this.initBackToTop();
+    this.initHeroTransition();
+    this.initPorQueReveal();
+    this.initComoTransition();
+    this.initSociosReveal();
+    this.initBioTextSpacing();
+    this.initBtnRowPosition();
+    this.initFooterScale();
+  }
+
+  componentDidUpdate() { this.applyResponsive(); }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.applyResponsive);
+    if (this.emailCopiedTimer) clearTimeout(this.emailCopiedTimer);
+    if (this.onHeroResize) window.removeEventListener('resize', this.onHeroResize);
+    if (this.onPorQueResize) window.removeEventListener('resize', this.onPorQueResize);
+    if (this.porQueTitleRO) this.porQueTitleRO.disconnect();
+    if (this.comoSlideRO) this.comoSlideRO.disconnect();
+    if (this.onComoResize) window.removeEventListener('resize', this.onComoResize);
+    if (this.rafHeroTransition) cancelAnimationFrame(this.rafHeroTransition);
+    if (this.rafPorQue) cancelAnimationFrame(this.rafPorQue);
+    if (this.rafComoTransition) cancelAnimationFrame(this.rafComoTransition);
+    if (this.rafSocios) cancelAnimationFrame(this.rafSocios);
+    if (this.onSociosResize) window.removeEventListener('resize', this.onSociosResize);
+    if (this.onSociosBioResize) window.removeEventListener('resize', this.onSociosBioResize);
+    if (this.bioTextRO) this.bioTextRO.disconnect();
+    if (this.btnRowRO) this.btnRowRO.disconnect();
+    if (this.onBtnRowResize) window.removeEventListener('resize', this.onBtnRowResize);
+    if (this.footerScaleRO) this.footerScaleRO.disconnect();
+    if (this.onFooterResize) window.removeEventListener('resize', this.onFooterResize);
+    if (this.onHeaderScroll) window.removeEventListener('scroll', this.onHeaderScroll);
+    if (this.onBackToTopScroll) window.removeEventListener('scroll', this.onBackToTopScroll);
+    if (this.onMove) window.removeEventListener('mousemove', this.onMove);
+    if (this.onOver) document.removeEventListener('mouseover', this.onOver);
+    if (this.onLeave) document.removeEventListener('mouseleave', this.onLeave);
+    if (this.rafCursor) cancelAnimationFrame(this.rafCursor);
+    if (this.io) this.io.disconnect();
+    document.documentElement.style.cursor = '';
+  }
+
+  initCursor() {
+    document.documentElement.style.cursor = 'none';
+    const dot = this.dotRef.current, ring = this.ringRef.current;
+    if (!dot || !ring) return;
+    let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+    let dx = mx, dy = my, rx = mx, ry = my, scale = 1, target = 1, shown = false;
+
+    this.onMove = (e) => {
+      mx = e.clientX; my = e.clientY;
+      if (!shown) { shown = true; dx = rx = mx; dy = ry = my; dot.style.opacity = '1'; ring.style.opacity = '.7'; }
+    };
+    this.onOver = (e) => {
+      const t = e.target instanceof Element ? e.target.closest('a,button,input,image-slot,[data-team-hotspot],[data-quote-hotspot]') : null;
+      target = t ? 2.1 : 1;
+      // Over the "Escríbenos" footer (same accent blue background as the cursor's own
+      // default color), the ring/dot would otherwise vanish into the background — swap
+      // them to white there so the cursor stays visible.
+      const overFooter = e.target instanceof Element ? !!e.target.closest('#contacto') : false;
+      const cursorColor = overFooter ? '#FFFFFF' : '#4D8BFF';
+      dot.style.background = cursorColor;
+      ring.style.boxShadow = 'inset 0 0 0 1.5px ' + cursorColor;
+      ring.style.background = t ? (overFooter ? 'rgba(255,255,255,.16)' : 'rgba(77,139,255,.16)') : 'transparent';
+    };
+    this.onLeave = () => { dot.style.opacity = '0'; ring.style.opacity = '0'; shown = false; };
+    window.addEventListener('mousemove', this.onMove, { passive: true });
+    document.addEventListener('mouseover', this.onOver, { passive: true });
+    document.addEventListener('mouseleave', this.onLeave);
+
+    const tick = () => {
+      dx += (mx - dx) * 0.38; dy += (my - dy) * 0.38;
+      rx += (mx - rx) * 0.13; ry += (my - ry) * 0.13;
+      scale += (target - scale) * 0.14;
+      dot.style.transform = 'translate3d(' + dx + 'px,' + dy + 'px,0)';
+      ring.style.transform = 'translate3d(' + rx + 'px,' + ry + 'px,0) scale(' + scale.toFixed(3) + ')';
+      this.rafCursor = requestAnimationFrame(tick);
+    };
+    this.rafCursor = requestAnimationFrame(tick);
+  }
+
+  initQuoteIntro() {
+    const words = [
+      { el: this.qWordSlowRef.current, delay: 0 },
+      { el: this.qWordIsSmoothRef.current, delay: 150 },
+      { el: this.qWordSmoothRef.current, delay: 260 },
+      { el: this.qWordIsFastRef.current, delay: 410 },
+    ].filter((w) => w.el);
+    if (!words.length) return;
+    if (this.reduced) {
+      words.forEach((w) => { w.el.style.transition = 'none'; w.el.style.opacity = '1'; w.el.style.transform = 'translateY(0)'; });
+      return;
+    }
+    // Force the hidden state to actually paint before flipping styles, otherwise a delay:0
+    // change can land in the same frame as the initial render and the transition never plays.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        words.forEach((w) => {
+          window.setTimeout(() => {
+            w.el.style.opacity = '1';
+            w.el.style.transform = 'translateY(0)';
+          }, w.delay);
+        });
+      });
+    });
+  }
+
+  initQuoteTooltip() {
+    const hotspot = this.quoteHeroRef.current, tip = this.quoteTooltipRef.current;
+    if (!hotspot || !tip) return;
+    // Mobile shows the attribution as a permanent static label (applyHeroQuoteLayout) —
+    // hover doesn't apply there, so show/hide simply no-op instead of fighting that fixed
+    // state. The listeners stay attached regardless of the width at mount, though —
+    // gating that on mount width (like this used to) meant a page that first loaded on
+    // mobile never attached them at all, so resizing an actual browser window up into
+    // desktop width later left hover with nothing to reveal the badge.
+    const show = () => {
+      if (window.innerWidth < 900) return;
+      tip.style.opacity = '1'; tip.style.transform = 'translateY(0)'; tip.style.pointerEvents = 'auto';
+    };
+    const hide = () => {
+      if (window.innerWidth < 900) return;
+      tip.style.opacity = '0'; tip.style.transform = 'translateY(8px)'; tip.style.pointerEvents = 'none';
+    };
+    if (this.reduced) tip.style.transition = 'none';
+    if (this.fine) {
+      hotspot.addEventListener('mouseenter', show);
+      hotspot.addEventListener('mouseleave', hide);
+    } else {
+      hotspot.addEventListener('click', () => {
+        if (window.innerWidth < 900) return;
+        if (tip.style.opacity === '1') hide(); else show();
+      });
+    }
+  }
+
+  // Header stays permanently white — it hides on scroll-down and slides back in on
+  // scroll-up, instead of swapping color per section.
+  initHeaderScroll() {
+    const header = this.headerRef.current;
+    if (!header) return;
+    if (this.reduced) return; // stays put, no hide/show motion for reduced-motion users.
+    header.style.transition = 'transform 280ms cubic-bezier(.2,.6,.2,1)';
+    let lastY = window.scrollY;
+    let hidden = false;
+    let ticking = false;
+    const HIDE_AFTER = 96; // never hide while still near the very top of the page.
+    const update = () => {
+      const y = window.scrollY;
+      const dy = y - lastY;
+      if (y <= HIDE_AFTER) {
+        if (hidden) { header.style.transform = 'translateY(0)'; hidden = false; }
+      } else if (dy > 4 && !hidden) {
+        header.style.transform = 'translateY(-100%)';
+        hidden = true;
+      } else if (dy < -4 && hidden) {
+        header.style.transform = 'translateY(0)';
+        hidden = false;
+      }
+      lastY = y;
+      ticking = false;
+    };
+    this.onHeaderScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+    window.addEventListener('scroll', this.onHeaderScroll, { passive: true });
+  }
+
+  // Shows the fixed "back to top" button once the user has scrolled past the Hero
+  // section, hides it again near the very top.
+  initBackToTop() {
+    const btn = this.backToTopRef.current;
+    if (!btn) return;
+    let shown = false;
+    let ticking = false;
+    const update = () => {
+      const shouldShow = window.scrollY > window.innerHeight * 0.8;
+      if (shouldShow !== shown) {
+        shown = shouldShow;
+        btn.style.opacity = shown ? '1' : '0';
+        btn.style.transform = shown ? 'translateY(0)' : 'translateY(12px)';
+        btn.style.pointerEvents = shown ? 'auto' : 'none';
+      }
+      ticking = false;
+    };
+    update();
+    this.onBackToTopScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+    window.addEventListener('scroll', this.onBackToTopScroll, { passive: true });
+  }
+
+  // Pins the Hero in place while "Quiénes somos" rises from below and covers it, its
+  // background lerping from accent blue to navy as the cover completes. Skipped entirely
+  // under prefers-reduced-motion — the markup already renders as a plain stacked layout.
+  initHeroTransition() {
+    const wrap = this.heroWrapRef.current, hero = this.heroSectionRef.current, section = this.quienesRef.current;
+    const content = this.quienesContentRef.current, heading = this.quienesHeadingRef.current, fika = this.quienesFikaRef.current;
+    const slide1 = this.quienesSlide1Ref.current, slide2 = this.quienesSlide2Ref.current;
+    const somos = this.quienesSomosRef.current, comms = this.quienesCommsRef.current;
+    if (!wrap || !hero || !section) return;
+    if (this.reduced) return; // base markup already shows heading + both slides stacked, fully visible, no JS needed.
+
+    const measureCanvas = document.createElement('canvas').getContext('2d');
+    const textWidthAt = (text, px, weight, family) => {
+      measureCanvas.font = weight + ' ' + px + 'px ' + family;
+      return measureCanvas.measureText(text).width;
+    };
+    // Both hard-broken title lines, so the title itself always stays a clean 2 lines —
+    // the description is allowed to wrap further, per the client's own call.
+    const TITLE_LINES = ['Una agencia boutique', 'y 100% híbrida.', 'Somos 100% agnósticos.'];
+
+    const placeSlides = () => {
+      if (!fika || !content || !heading) return;
+      if (window.innerWidth < 900) {
+        // Client reference: the giant heading bleeds off the left edge only and stays
+        // left-aligned, matching "founders"/"por qué fika comms"'s mobile convention —
+        // SOMOS/COMMS are wider than the screen and clip against the section's own
+        // overflow:hidden, FIKA (being shorter) just stays put. Mobile has no pin/cross-fade
+        // (see the bail-out further down, same rationale as "Por qué"'s) — the copy pair
+        // just stacks normally below the heading in the document's own flow (already how
+        // the base markup orders heading → slide1 → slide2), each left-aligned within the
+        // section's side padding, instead of overlapping and cross-fading in place.
+        heading.style.marginLeft = '0';
+        heading.style.marginRight = '0';
+        heading.style.textAlign = 'left';
+        heading.style.fontSize = 'clamp(64px,24vw,120px)';
+        [slide1, slide2].forEach((el) => {
+          if (!el) return;
+          el.style.maxWidth = 'none';
+          el.style.width = 'auto';
+          el.style.justifyContent = 'flex-start';
+          el.style.gap = '16px';
+          el.style.alignItems = 'flex-start';
+          el.style.textAlign = 'left';
+          const ps = el.querySelectorAll('p');
+          // The subtitle needs its own explicit size — clearing it to '' drops the
+          // original clamp() for good (JS owns the inline style once touched, there's no
+          // reverting to "what the markup said"), leaving it the same size as the body
+          // copy below it instead of standing out like it does on desktop.
+          if (ps[0]) ps[0].style.fontSize = 'clamp(32px,9vw,52px)';
+        });
+        // Extra breathing room between the two stacked blocks now that both sit in normal
+        // flow instead of cross-fading in place — the base markup's 24px reads as too
+        // tight once they're both on screen together.
+        if (slide2) slide2.style.marginTop = '56px';
+        content.style.minHeight = '';
+        return;
+      }
+      content.style.minHeight = '';
+      heading.style.marginLeft = '0'; heading.style.marginRight = '0';
+      heading.style.textAlign = 'left'; heading.style.fontSize = 'clamp(56px,17vw,300px)';
+      const probe = slide1 || slide2;
+      if (!probe) return;
+      // `content` is a flex item being vertically centered inside a shorter, clipped
+      // section, which shifts where an absolutely-positioned child's top:0/left:0 actually
+      // lands relative to a plain contentRect.top/left assumption. Rather than guess at
+      // that offset, zero it out, measure where it truly renders, and solve backwards —
+      // this stays correct regardless of why the shift happens.
+      const prevTop = probe.style.top, prevLeft = probe.style.left;
+      probe.style.top = '0px';
+      probe.style.left = '0px';
+      const zeroRect = probe.getBoundingClientRect();
+      probe.style.top = prevTop;
+      probe.style.left = prevLeft;
+
+      const fikaRect = fika.getBoundingClientRect(), contentRect = content.getBoundingClientRect();
+      // Extra breathing room, both before the text starts (past FIKA) and how much width
+      // it's allowed to claim — deliberately narrower than "whatever space is left", so the
+      // pair reads as a compact block with air around it rather than stretching edge to
+      // edge. A narrower box can push the description past 2 lines, which is fine here.
+      const left = Math.round(fikaRect.right - zeroRect.left) + 40;
+      const top = Math.round(fikaRect.top - zeroRect.top);
+      const height = Math.max(40, Math.round(fikaRect.height));
+      const maxWidth = Math.min(460, Math.max(160, Math.round(contentRect.width - left - 24)));
+      const gap = Math.max(6, Math.min(20, height * 0.08));
+
+      const heightConstrained = (height - gap) / 3.1324;
+      const titleWidthAt100 = Math.max(...TITLE_LINES.map((t) => textWidthAt(t, 100, '200', 'Sora, sans-serif')));
+      const titleWidthConstrained = (maxWidth / titleWidthAt100) * 100;
+      const titleFont = Math.max(10, Math.min(heightConstrained, titleWidthConstrained) * 0.9);
+      // The description keeps the standard body-paragraph style (Inter 16px/1.556, set once
+      // in the markup) instead of scaling off the title — that's the size to reuse for any
+      // other long-form paragraph on the site, so it stays consistent everywhere.
+
+      [slide1, slide2].forEach((el) => {
+        if (!el) return;
+        el.style.left = left + 'px';
+        el.style.top = top + 'px';
+        el.style.height = height + 'px';
+        el.style.maxWidth = maxWidth + 'px';
+        el.style.justifyContent = 'center';
+        el.style.gap = gap + 'px';
+        el.style.alignItems = 'stretch';
+        el.style.textAlign = 'left';
+        const ps = el.querySelectorAll('p');
+        if (ps[0]) ps[0].style.fontSize = titleFont + 'px';
+      });
+    };
+    // How far SOMOS/COMMS need to travel to fully clear the screen (not just drift a
+    // little), measured from their own real, untransformed position — so it's always
+    // exactly enough regardless of viewport width or font metrics, never a guess.
+    let somosExit = 0, commsExit = 0;
+    const measureSpread = () => {
+      if (somos) {
+        somos.style.transform = 'translateX(0px)';
+        somosExit = Math.round(somos.getBoundingClientRect().right) + 60;
+      }
+      if (comms) {
+        comms.style.transform = 'translateX(0px)';
+        commsExit = Math.round(window.innerWidth - comms.getBoundingClientRect().left) + 60;
+      }
+    };
+    const refreshLayout = () => { placeSlides(); measureSpread(); };
+
+    // The pin/cross-fade (below) only makes sense once there's room to scroll through it —
+    // on mobile it's skipped entirely in favor of a normal stacked flow (see teardownPin).
+    // This used to be decided ONCE at mount and never revisited, so resizing an actual
+    // browser window across the 900px line (not just reloading at a new width) left the
+    // section stuck in whichever mode it started in. pinActive + setupPin/teardownPin make
+    // the decision redo-able on every resize, in either direction.
+    let pinActive = false;
+    let pinSetupToken = 0;
+
+    const teardownPin = () => {
+      if (!pinActive) return;
+      pinActive = false;
+      pinSetupToken++; // invalidates any in-flight setupPin() double-rAF from before this
+      if (this.rafHeroTransition) { cancelAnimationFrame(this.rafHeroTransition); this.rafHeroTransition = null; }
+      wrap.style.height = '';
+      hero.style.position = ''; hero.style.top = ''; hero.style.zIndex = '';
+      // section's position/min-height/background are authored inline in the base markup
+      // (position:relative;min-height:100vh;background:#0B1F3A) — clearing them to '' would
+      // fall through to the browser default instead of restoring what the markup actually
+      // says, so they're reset to those exact original values instead.
+      section.style.position = 'relative'; section.style.top = ''; section.style.height = '';
+      section.style.minHeight = '100vh'; section.style.zIndex = ''; section.style.transform = '';
+      section.style.transition = ''; section.style.background = '#0B1F3A';
+      if (heading) { heading.style.opacity = ''; heading.style.transition = ''; }
+      [slide1, slide2].forEach((el) => {
+        if (!el) return;
+        el.style.position = ''; el.style.opacity = ''; el.style.transform = ''; el.style.transition = '';
+      });
+      // Same reasoning as section's background: margin-top is authored per-slide in the
+      // base markup, but got overwritten by setupPin's shorthand `margin:'0'` — restore
+      // each slide's own original value rather than clearing (placeSlides' mobile branch
+      // then bumps slide2's further to 56px for breathing room, as it already did).
+      if (slide1) slide1.style.marginTop = 'clamp(24px,4vw,48px)';
+      if (slide2) slide2.style.marginTop = '24px';
+      if (somos) somos.style.transform = '';
+      if (comms) comms.style.transform = '';
+    };
+
+    const setupPin = () => {
+      if (pinActive) return;
+      pinActive = true;
+      const token = ++pinSetupToken;
+      // Turn the two copy slides into an overlapping pair placed to the right of the
+      // "FIKA" line (measured from its actual rendered box, never guessed), so they never
+      // collide with the giant heading's glyphs and can cross-fade in place during the
+      // scroll.
+      [slide1, slide2].forEach((el) => {
+        if (!el) return;
+        el.style.position = 'absolute';
+        el.style.margin = '0';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(24px)';
+        el.style.transition = 'opacity 300ms linear, transform 300ms linear';
+      });
+      if (heading) { heading.style.opacity = '0'; heading.style.transition = 'opacity 300ms linear'; }
+
+      // Hero AND section 2 are BOTH sticky at the same top offset, inside the same tall
+      // wrap — so once section 2's rise finishes, it is pinned exactly like Hero was, and
+      // scrolling further only drives opacity cross-fades, never vertical movement. This is
+      // what makes it "feel horizontal": the vertical position never changes once arrived.
+      // Measuring Hero's real height has to wait a couple of frames — read synchronously at
+      // mount, aspect-ratio/clamp() sizing hadn't settled yet and this read back a bogus,
+      // too-small value, which then sized section 2 to not match Hero at all.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (token !== pinSetupToken) return; // torn down (or re-setup) again before this fired
+          // Measure Hero's REAL rendered height rather than assuming "100vh - 76px" — its
+          // content (the giant quote composition) can overflow that nominal box by a few tens
+          // of pixels. Section 2 is then sized to match EXACTLY, so both release from
+          // position:sticky at the same scroll position — a mismatch here is what let the
+          // section underneath show through for a sliver of scroll right at the handoff.
+          const heroHeight = hero.offsetHeight;
+          const hold = window.innerHeight * 2.4;
+          wrap.style.height = 'calc(' + heroHeight + 'px + ' + hold + 'px)';
+          hero.style.position = 'sticky';
+          hero.style.top = '0px';
+          hero.style.zIndex = '1';
+          section.style.position = 'sticky';
+          section.style.top = '0px';
+          section.style.height = heroHeight + 'px';
+          section.style.minHeight = '0';
+          section.style.zIndex = '2';
+          section.style.transform = 'translateY(100%)';
+          section.style.transition = 'none';
+
+          const from = [77, 139, 255], to = [11, 31, 58];
+          const lerpColor = (p) => 'rgb(' + from.map((v, i) => Math.round(v + (to[i] - v) * p)).join(',') + ')';
+          const seg = (p, a, b) => Math.min(1, Math.max(0, (p - a) / (b - a)));
+
+          let last = -1;
+          const tick = () => {
+            if (token !== pinSetupToken) return; // stop once torn down
+            const rect = wrap.getBoundingClientRect();
+            const travel = wrap.offsetHeight - hero.offsetHeight;
+            let p = travel > 0 ? -rect.top / travel : 0;
+            p = Math.min(1, Math.max(0, p));
+            if (Math.abs(p - last) > 0.001) {
+              // 0.00–0.08: section 2 physically rises into place (translateY 100%→0) while its
+              // background lerps blue→navy — this is the only phase with any vertical motion.
+              const rise = seg(p, 0, 0.08);
+              section.style.transform = 'translateY(' + (1 - rise) * 100 + '%)';
+              section.style.background = lerpColor(rise);
+              // 0.06–0.12: the giant heading fades in, right as the rise finishes.
+              if (heading) heading.style.opacity = String(seg(p, 0.06, 0.12));
+              // 0.12–0.18 slide 1 fades in, then HOLDS untouched all the way to 0.70 — that
+              // stretch (well over a full viewport of scroll) is meant to read as "this is
+              // section 2, settled, vertically fixed", not a transition — it only starts
+              // leaving at 0.70, like advancing to a further section.
+              if (slide1) {
+                const op = Math.min(seg(p, 0.12, 0.18), 1 - seg(p, 0.70, 0.78));
+                slide1.style.opacity = String(op);
+                slide1.style.transform = 'translateY(' + (1 - seg(p, 0.12, 0.18)) * 24 + 'px)';
+              }
+              // 0.74–0.84 slide 2 fades in (overlapping slide 1's fade-out) and holds to the end.
+              if (slide2) {
+                const inOp = seg(p, 0.74, 0.84);
+                slide2.style.opacity = String(inOp);
+                slide2.style.transform = 'translateY(' + (1 - inOp) * 24 + 'px)';
+              }
+              // Same 0.74–0.84 window: SOMOS exits fully to the left and COMMS fully to the
+              // right (FIKA stays put), clearing the composition entirely as slide 2 settles in.
+              if (somos || comms) {
+                const exit = seg(p, 0.74, 0.84);
+                if (somos) somos.style.transform = 'translateX(-' + (exit * somosExit).toFixed(1) + 'px)';
+                if (comms) comms.style.transform = 'translateX(' + (exit * commsExit).toFixed(1) + 'px)';
+              }
+              last = p;
+            }
+            this.rafHeroTransition = requestAnimationFrame(tick);
+          };
+          this.rafHeroTransition = requestAnimationFrame(tick);
+        });
+      });
+    };
+
+    const syncMode = () => {
+      if (window.innerWidth < 900) teardownPin(); else setupPin();
+      refreshLayout();
+    };
+
+    // Canvas text measurement silently falls back to a substitute font until the real
+    // one has finished loading — re-measure once Sora/Inter are actually ready so the
+    // computed title size matches what's really rendered, not a stand-in font's metrics.
+    if (document.fonts && document.fonts.load) {
+      Promise.all([
+        document.fonts.load('200 100px Sora'),
+        document.fonts.load('800 100px Sora'),
+      ]).catch(() => {}).then(refreshLayout);
+    }
+    window.addEventListener('resize', syncMode);
+    this.onHeroResize = syncMode;
+    syncMode();
+  }
+
+  initReveal() {
+    const nodes = Array.from(document.querySelectorAll('[data-reveal]'));
+    if (!nodes.length || !('IntersectionObserver' in window)) return;
+    const vh = window.innerHeight;
+    const seen = new Map();
+    nodes.forEach((n) => {
+      if (n.getBoundingClientRect().top < vh * 0.92) return;
+      const key = n.closest('section,footer') || document.body;
+      const i = (seen.get(key) || 0);
+      seen.set(key, i + 1);
+      n.style.opacity = '0';
+      n.style.transform = 'translateY(28px)';
+      n.style.transition = 'opacity 640ms cubic-bezier(.2,.6,.2,1) ' + Math.min(i * 90, 360) + 'ms, transform 640ms cubic-bezier(.2,.6,.2,1) ' + Math.min(i * 90, 360) + 'ms';
+      n.setAttribute('data-pending', '');
+    });
+    this.io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (!en.isIntersecting) return;
+        en.target.style.opacity = '1';
+        en.target.style.transform = 'translateY(0)';
+        this.io.unobserve(en.target);
+      });
+    }, { rootMargin: '0px 0px -10% 0px' });
+    nodes.forEach((n) => { if (n.hasAttribute('data-pending')) this.io.observe(n); });
+  }
+
+  // "Por qué Fika Comms": the photo (base photo + cup cutout, revealed together as one
+  // unit so the cup is already covering the title's spot before the title appears) comes
+  // in first and early; the title+description only reveal once the user has scrolled
+  // noticeably further — a bigger rootMargin, not just a small stagger.
+  initPorQueReveal() {
+    const wrapEl = this.porQueWrapRef.current, photo = this.porQuePhotoRef.current, cup = this.porQueCupRef.current;
+    const title = this.porQueTitleRef.current, desc = this.porQueDescRef.current;
+    const line1 = this.porQueLine1Ref.current, line2 = this.porQueLine2Ref.current, line3 = this.porQueLine3Ref.current;
+    if (!photo || !title) return;
+
+    // Mobile (client reference): a single full-bleed photo — no cup-cutout double layer —
+    // with the title's first line straddling its bottom edge and the copy stacked below,
+    // instead of desktop's photo-plus-cutout composition with copy beside it. One function
+    // does the whole layout (photo/title/desc together) so nothing can desync between a
+    // font-load reflow and a stale position computed before it.
+    const sidePad = 'clamp(20px,5vw,72px)';
+    const porQueMeasureCanvas = document.createElement('canvas').getContext('2d');
+    const layout = () => {
+      const mobile = window.innerWidth < 900;
+      if (mobile) {
+        this.porQueSectionRef.current.style.paddingTop = '0';
+        this.porQueSectionRef.current.style.alignItems = 'flex-start';
+        photo.style.width = 'calc(100% + ' + sidePad + ' * 2)';
+        photo.style.marginLeft = 'calc(' + sidePad + ' * -1)';
+        if (cup) cup.style.display = 'none';
+        // left/right:0 here, not another sidePad — the wrap this is positioned against is
+        // ALREADY inset by the section's own side padding (that's what the photo breaks
+        // OUT of above), so adding sidePad again just double-margins the title and copy
+        // against every other section's text.
+        title.style.left = '0'; title.style.right = '0'; title.style.width = 'auto';
+        if (line1) line1.style.textAlign = 'left';
+        if (line2) line2.style.display = 'block';
+        if (line3) line3.style.display = 'block';
+        // The client reference wants the title filling the full available width — measure
+        // the widest of the three words (real glyph metrics, not the desktop clamp() ratio,
+        // which tops out far short of that) and scale to fit, same technique already used
+        // for "founders" and the Hero quote's mobile sizing.
+        const h2 = title.querySelector('h2');
+        if (h2) {
+          const available = wrapEl.getBoundingClientRect().width;
+          const probe = 200;
+          porQueMeasureCanvas.font = '800 ' + probe + 'px Sora, sans-serif';
+          const widest = Math.max(...['por qué', 'fika', 'comms'].map((w) => porQueMeasureCanvas.measureText(w).width));
+          h2.style.fontSize = Math.max(36, widest > 0 ? probe * (available / widest) : probe) + 'px';
+        }
+      } else {
+        // Setting a single longhand (paddingTop) via JS silently expands the original
+        // shorthand `padding` declaration into its longhands — clearing it back to ''
+        // afterwards does NOT restore the shorthand, it just leaves padding-top unset
+        // (0), so the only reliable reset is to spell out the original value again.
+        this.porQueSectionRef.current.style.paddingTop = 'max(96px,clamp(56px,8vw,104px))';
+        this.porQueSectionRef.current.style.alignItems = 'center';
+        // Same "clearing to '' doesn't restore the original" trap as padding-top above —
+        // this h2's font-size was ALSO first touched by the mobile branch, so '' would
+        // fall through to the browser's bare h2 default instead of the real clamp().
+        // A plain vw-based clamp doesn't know whether "fika comms" (line2+line3, meant to
+        // share one line) actually fits the title box's real pixel width — at tablet
+        // widths the vw value stays large enough that it doesn't, so "comms" wraps onto
+        // its own line and drops down over the photo. Measuring real glyph metrics against
+        // the box's actual width — the same technique already used for the mobile branch
+        // just below — guarantees it always fits on one line, at any desktop-mode width.
+        const h2reset = title.querySelector('h2');
+        if (h2reset) {
+          const availableReset = wrapEl.getBoundingClientRect().width * 0.78274;
+          const probeReset = 200;
+          porQueMeasureCanvas.font = '800 ' + probeReset + 'px Sora, sans-serif';
+          const widestReset = Math.max(
+            porQueMeasureCanvas.measureText('por qué').width,
+            porQueMeasureCanvas.measureText('fika comms').width
+          );
+          h2reset.style.fontSize = Math.min(165, Math.max(36, widestReset > 0 ? probeReset * (availableReset / widestReset) : probeReset)) + 'px';
+        }
+        photo.style.width = '60.912%'; photo.style.marginLeft = '0';
+        if (cup) cup.style.display = '';
+        title.style.left = '21.726%'; title.style.right = 'auto'; title.style.width = '78.274%'; title.style.top = '1.028%';
+        if (line1) line1.style.textAlign = 'right';
+        if (line2) line2.style.display = 'inline';
+        if (line3) line3.style.display = 'inline';
+      }
+      if (mobile && wrapEl && line1) {
+        // The first line straddles the photo's bottom edge — half its height sits over
+        // the photo, half over the white background below — measured off the photo's
+        // REAL rendered edge and the line's real height, not guessed percentages.
+        const wrapRect = wrapEl.getBoundingClientRect();
+        const photoBottom = Math.round(photo.getBoundingClientRect().bottom - wrapRect.top);
+        const line1Height = line1.offsetHeight || title.offsetHeight / 3 || 40;
+        title.style.top = Math.round(photoBottom - line1Height * 0.8) + 'px';
+      }
+      if (wrapEl && desc) {
+        if (mobile) { desc.style.left = '0'; desc.style.right = '0'; }
+        else { desc.style.left = 'calc(60.912% + clamp(20px,3vw,40px))'; desc.style.right = '0'; }
+        const titleRect = title.getBoundingClientRect(), wrapRect = wrapEl.getBoundingClientRect();
+        desc.style.top = Math.round(titleRect.bottom - wrapRect.top) + 16 + 'px';
+        // Mobile stacks photo → title → copy vertically, and the copy is absolutely
+        // positioned (out of flow) — reserve real space for it on the wrap so the
+        // section's flex centering centers the WHOLE composition, not just the photo.
+        if (mobile) wrapEl.style.minHeight = Math.round(desc.getBoundingClientRect().bottom - wrapRect.top) + 'px';
+        else wrapEl.style.minHeight = '';
+      }
+    };
+    layout();
+    // A one-shot font-load callback can fire a frame before the title has actually
+    // reflowed to its real (post-swap) height, leaving everything placed against a stale,
+    // too-small rect. A ResizeObserver reacts to the title's actual box whenever it
+    // changes, for any reason, so it can't go stale like that.
+    if (title && 'ResizeObserver' in window) {
+      this.porQueTitleRO = new ResizeObserver(layout);
+      this.porQueTitleRO.observe(title);
+    } else if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(layout);
+    }
+    window.addEventListener('resize', layout);
+    this.onPorQueResize = layout;
+
+    if (this.reduced) {
+      [photo, cup, title, desc].forEach((el) => { if (el) { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; } });
+      return;
+    }
+    const reveal = (el) => { el.style.transition = 'opacity 640ms cubic-bezier(.2,.6,.2,1), transform 640ms cubic-bezier(.2,.6,.2,1)'; el.style.opacity = '1'; el.style.transform = 'translateY(0)'; };
+    // Polls scroll position directly via rAF instead of IntersectionObserver — the same
+    // technique already driving the Hero/Section 2 transition, so both staged reveals on
+    // this page share one proven mechanism instead of two different ones.
+    let photoRevealed = false, titleRevealed = false;
+    const check = () => {
+      const vh = window.innerHeight;
+      if (!photoRevealed) {
+        const r = photo.getBoundingClientRect();
+        if (r.top < vh * 0.85 && r.bottom > 0) {
+          reveal(photo);
+          if (cup) reveal(cup);
+          photoRevealed = true;
+        }
+      }
+      if (!titleRevealed) {
+        const r = title.getBoundingClientRect();
+        if (r.top < vh * 0.45 && r.bottom > 0) {
+          reveal(title);
+          if (desc) reveal(desc);
+          titleRevealed = true;
+        }
+      }
+      if (!photoRevealed || !titleRevealed) {
+        this.rafPorQue = requestAnimationFrame(check);
+      }
+    };
+    this.rafPorQue = requestAnimationFrame(check);
+  }
+
+  // "Socios": same 2-stage reveal as "Por qué Fika Comms" — the photo (with its cutout
+  // layer, revealed together as one unit) comes in first; the giant "socios." heading and
+  // the small name labels only reveal once the user has scrolled noticeably further.
+  initSociosReveal() {
+    const mobileBlock = this.sociosMobileRef.current;
+    const photo = this.sociosPhotoBoxRef.current, cutout = this.sociosCutoutBoxRef.current;
+    const heading = this.sociosHeadingRef.current, nombres = this.sociosNombresRef.current;
+    if (!mobileBlock && !(photo && heading)) return;
+
+    if (this.reduced) {
+      if (mobileBlock) { mobileBlock.style.opacity = '1'; mobileBlock.style.transform = 'translateY(0)'; }
+      [photo, cutout, heading, nombres].forEach((el) => { if (el) { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; } });
+      return;
+    }
+
+    // Mobile has one plain block (heading + photo + name rows) instead of the desktop's
+    // two-stage photo-then-heading reveal, so it gets its own single fade-in check rather
+    // than touching photo/heading/nombres/cutout at all — same idea as "Por qué"'s and
+    // Hero's mobile/desktop split, just for opacity instead of layout. Deciding which one
+    // applies ONLY once (at mount, like this used to) meant resizing an actual browser
+    // window past 900px (either direction) after the section had already revealed left
+    // the OTHER mode's elements stuck at opacity:0 forever, since their own check loop
+    // never got a turn to run. The resize listener below restarts the (bounded, not
+    // running forever) check loop whenever it isn't already active, so switching modes —
+    // before or after the section's first reveal — always gets its own chance.
+    let photoLayoutDone = false;
+    let mobileRevealed = false, photoRevealed = false, headingRevealed = false;
+
+    const checkOnce = () => {
+      const mobile = window.innerWidth < 900;
+      const vh = window.innerHeight;
+      let pending = false;
+      if (mobile) {
+        if (!mobileRevealed && mobileBlock) {
+          const r = mobileBlock.getBoundingClientRect();
+          if (r.top < vh * 0.85 && r.bottom > 0) {
+            mobileBlock.style.opacity = '1';
+            mobileBlock.style.transform = 'translateY(0)';
+            mobileRevealed = true;
+          } else pending = true;
+        }
+      } else if (photo && heading) {
+        // Establishes the photo's real on-screen size/position before anything else — the
+        // base markup can't express this (it depends on the wrap's measured width), and
+        // the reveal below only touches opacity/translateY, never this.
+        if (!photoLayoutDone) { this.applyBioLayout(null); photoLayoutDone = true; }
+        if (!photoRevealed) {
+          const r = photo.getBoundingClientRect();
+          if (r.top < vh * 0.85 && r.bottom > 0) {
+            photo.style.opacity = '1'; photo.style.transform = 'translateY(0)';
+            if (cutout) { cutout.style.opacity = '1'; cutout.style.transform = 'translateY(0)'; }
+            photoRevealed = true;
+          } else pending = true;
+        }
+        if (!headingRevealed) {
+          const r = heading.getBoundingClientRect();
+          if (r.top < vh * 0.45 && r.bottom > 0) {
+            heading.style.opacity = '1'; heading.style.transform = 'translateY(0)';
+            if (nombres) { nombres.style.opacity = '1'; nombres.style.transform = 'translateY(0)'; }
+            headingRevealed = true;
+          } else pending = true;
+        }
+      }
+      return pending;
+    };
+    const loop = () => {
+      if (checkOnce()) { this.rafSocios = requestAnimationFrame(loop); } else { this.rafSocios = null; }
+    };
+    loop();
+    this.onSociosResize = () => { if (!this.rafSocios) loop(); };
+    window.addEventListener('resize', this.onSociosResize);
+  }
+
+  // Click-triggered (not scroll-linked) crop transition for the "Socios" photo: the
+  // visible window (box) resizes/moves via its own declared CSS transition, while the
+  // image inside keeps a CONSTANT rendered scale — matched to Figma's numbers, which show
+  // the photo at the exact same scale in both the main and the Denise-bio composition —
+  // and only slides its own position within that window, so the photo pans, never zooms.
+  applyBioLayout(who) {
+    // Mobile never runs the desktop pan/crop math below — it has its own full-screen
+    // modal instead, so this bails out before touching a single desktop ref.
+    if (window.innerWidth < 900) { this.applyMobileBioModal(who); return; }
+    const wrap = this.sociosWrapRef.current;
+    const photoBox = this.sociosPhotoBoxRef.current, photoImg = this.sociosPhotoImgRef.current;
+    const cutoutBox = this.sociosCutoutBoxRef.current, cutoutImg = this.sociosCutoutImgRef.current;
+    const bioPhotoBox = this.sociosBioPhotoBoxRef.current;
+    const bioPhotoDenise = this.sociosBioPhotoDeniseRef.current, bioPhotoManu = this.sociosBioPhotoManuRef.current;
+    const heading = this.sociosHeadingRef.current, nombres = this.sociosNombresRef.current;
+    const closeBioBtn = this.sociosCloseBioRef.current;
+    const bioNameDenise = this.sociosBioNameDeniseRef.current, bioTextDenise = this.sociosBioTextDeniseRef.current;
+    const bioNameManu = this.sociosBioNameManuRef.current, bioTextManu = this.sociosBioTextManuRef.current;
+    if (!wrap || !photoBox) return;
+
+    // Both bios reuse the SAME crop window/box (matches Figma's Denise composition
+    // exactly) — only which portion of the photo is visible (imgAbsoluteLeftPct) and
+    // which bio text shows change per person, not the overall layout template.
+    const MAIN_BOX = { left: 21.14, top: 23.66, width: 77.19, height: 65.17 };
+    const BIO_BOX = { left: 64.03, top: 23.65, width: 34.31, height: 65.21 };
+    const IMG_WIDTH_PCT = 77.19;
+    const MAIN_IMG_LEFT_PCT = 21.14;
+    const DENISE_IMG_LEFT_PCT = 53.57;
+    // Manu isn't in a Figma bio-crop node yet — mirrored from Denise's window around the
+    // photo's own center as a best-effort placeholder, pending his real composition.
+    const MANU_IMG_LEFT_PCT = 31.57;
+
+    const bioOpen = who === 'denise' || who === 'manu';
+    const box = bioOpen ? BIO_BOX : MAIN_BOX;
+    const imgAbsoluteLeftPct = who === 'denise' ? DENISE_IMG_LEFT_PCT : who === 'manu' ? MANU_IMG_LEFT_PCT : MAIN_IMG_LEFT_PCT;
+
+    [photoBox, cutoutBox, bioPhotoBox].forEach((el) => {
+      if (!el) return;
+      el.style.left = box.left + '%';
+      el.style.top = box.top + '%';
+      el.style.width = box.width + '%';
+      el.style.height = box.height + '%';
+    });
+
+    const applyImgPosition = () => {
+      const wrapWidth = wrap.getBoundingClientRect().width;
+      const imgWidthPx = wrapWidth * (IMG_WIDTH_PCT / 100);
+      const imgLeftPx = wrapWidth * (imgAbsoluteLeftPct / 100) - wrapWidth * (box.left / 100);
+      [photoImg, cutoutImg].forEach((img) => {
+        if (!img) return;
+        img.style.width = imgWidthPx + 'px';
+        img.style.left = imgLeftPx + 'px';
+      });
+    };
+    applyImgPosition();
+    if (this.onSociosBioResize) window.removeEventListener('resize', this.onSociosBioResize);
+    this.onSociosBioResize = applyImgPosition;
+    window.addEventListener('resize', this.onSociosBioResize);
+
+    if (heading) {
+      heading.style.opacity = bioOpen ? '0' : '1';
+      heading.style.transform = bioOpen ? 'translateX(-32px)' : 'translateY(0)';
+    }
+    if (nombres) nombres.style.opacity = bioOpen ? '0' : '1';
+    if (cutoutBox) cutoutBox.style.opacity = bioOpen ? '0' : '1';
+    // The dedicated bio portraits replace the panned group photo while a bio is open —
+    // the group photo/cutout fade out, this box fades in, and the two portraits
+    // cross-fade between each other so switching Denise -> Manu never dips through the
+    // group photo in between.
+    if (photoBox) photoBox.style.opacity = bioOpen ? '0' : '1';
+    if (bioPhotoBox) bioPhotoBox.style.opacity = bioOpen ? '1' : '0';
+    if (bioPhotoDenise) bioPhotoDenise.style.opacity = who === 'denise' ? '1' : '0';
+    if (bioPhotoManu) bioPhotoManu.style.opacity = who === 'manu' ? '1' : '0';
+    if (closeBioBtn) {
+      closeBioBtn.style.opacity = bioOpen ? '1' : '0';
+      closeBioBtn.style.pointerEvents = bioOpen ? 'auto' : 'none';
+    }
+    const showBioBlock = (nameEl, textEl, show) => {
+      [nameEl, textEl].forEach((el, i) => {
+        if (!el) return;
+        const delay = i === 0 ? 200 : 320;
+        el.style.transition = 'opacity 640ms cubic-bezier(.2,.6,.2,1) ' + (show ? delay : 0) + 'ms, transform 640ms cubic-bezier(.2,.6,.2,1) ' + (show ? delay : 0) + 'ms';
+        el.style.opacity = show ? '1' : '0';
+        el.style.transform = show ? 'translateY(0)' : 'translateY(28px)';
+        el.style.pointerEvents = show ? 'auto' : 'none';
+      });
+    };
+    showBioBlock(bioNameDenise, bioTextDenise, who === 'denise');
+    showBioBlock(bioNameManu, bioTextManu, who === 'manu');
+  }
+
+  // Mobile bio: a fixed full-screen sheet instead of the desktop crop/pan swap — there's
+  // no room on a phone to pan within the group photo, so tapping "Ver Bio" opens a modal
+  // with a dedicated portrait + the same copy. The copy is read straight off the existing
+  // desktop bio refs (never duplicated into the markup) so there's a single source of
+  // truth if it's edited later.
+  applyMobileBioModal(who) {
+    const modal = this.sociosBioModalRef.current;
+    if (!modal) return;
+    const open = who === 'denise' || who === 'manu';
+    if (open) {
+      const nameEl = who === 'denise' ? this.sociosBioNameDeniseRef.current : this.sociosBioNameManuRef.current;
+      const textEl = who === 'denise' ? this.sociosBioTextDeniseRef.current : this.sociosBioTextManuRef.current;
+      const photoEl = this.sociosBioModalPhotoRef.current;
+      if (photoEl) {
+        photoEl.src = who === 'denise' ? 'assets/bio-denise.webp' : 'assets/bio-manu.webp';
+        photoEl.alt = who === 'denise' ? 'Denise Humphreys' : 'Manu Chatlani';
+      }
+      if (nameEl) {
+        const ps = nameEl.querySelectorAll('p');
+        if (this.sociosBioModalNameRef.current) this.sociosBioModalNameRef.current.textContent = ps[0] ? ps[0].textContent : '';
+        if (this.sociosBioModalRoleRef.current) this.sociosBioModalRoleRef.current.textContent = ps[1] ? ps[1].textContent : '';
+        if (this.sociosBioModalTaglineRef.current) this.sociosBioModalTaglineRef.current.textContent = ps[2] ? ps[2].textContent : '';
+      }
+      if (textEl && this.sociosBioModalTextRef.current) {
+        const container = this.sociosBioModalTextRef.current;
+        container.innerHTML = '';
+        textEl.querySelectorAll('p').forEach((p) => {
+          const clone = document.createElement('p');
+          clone.style.cssText = 'margin:0;font-family:Inter,sans-serif;font-weight:400;font-size:16px;line-height:1.556;color:#071527';
+          clone.innerHTML = p.innerHTML;
+          container.appendChild(clone);
+        });
+      }
+      modal.style.display = 'block';
+      if (this.sociosBioModalSheetRef.current) this.sociosBioModalSheetRef.current.scrollTop = 0;
+      void modal.offsetHeight;
+      modal.style.opacity = '1';
+      // `overflow:hidden` alone doesn't reliably hold the page in place on mobile
+      // browsers while a fixed-position modal is open — some visibly snap the
+      // background back to scrollY:0 instead of leaving it where the user actually was.
+      // Freezing body at its exact current offset (and restoring that exact offset on
+      // close) is the standard, reliable fix. `html{scroll-behavior:smooth}` would
+      // otherwise animate the scrollY:0 this position:fixed switch implies (and, on
+      // close, animate the scrollTo back) — the whole point here is an invisible,
+      // instant swap, so that has to be suspended for exactly this one synchronous op.
+      const prevScrollBehavior = document.documentElement.style.scrollBehavior;
+      document.documentElement.style.scrollBehavior = 'auto';
+      this.bioModalScrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = -this.bioModalScrollY + 'px';
+      document.body.style.width = '100%';
+      document.documentElement.style.scrollBehavior = prevScrollBehavior;
+    } else {
+      modal.style.opacity = '0';
+      setTimeout(() => { if (this.state.activeBio == null) modal.style.display = 'none'; }, 320);
+      const prevScrollBehavior = document.documentElement.style.scrollBehavior;
+      document.documentElement.style.scrollBehavior = 'auto';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      window.scrollTo(0, this.bioModalScrollY || 0);
+      document.documentElement.style.scrollBehavior = prevScrollBehavior;
+    }
+  }
+
+  // Positions each bio's description block below its own name block's ACTUAL rendered
+  // bottom edge, not a shared guessed top% — Manu's tagline is much longer than Denise's
+  // and wraps to an extra line at some widths, so a fixed top for both left them cramped
+  // together for him. A ResizeObserver keeps this correct across any reflow.
+  initBioTextSpacing() {
+    const wrap = this.sociosWrapRef.current;
+    const pairs = [
+      [this.sociosBioNameDeniseRef.current, this.sociosBioTextDeniseRef.current],
+      [this.sociosBioNameManuRef.current, this.sociosBioTextManuRef.current],
+    ];
+    if (!wrap) return;
+    const place = (nameEl, textEl) => {
+      const wrapRect = wrap.getBoundingClientRect(), nameRect = nameEl.getBoundingClientRect();
+      const margin = Math.max(24, wrapRect.height * 0.025);
+      textEl.style.top = Math.round(nameRect.bottom - wrapRect.top + margin) + 'px';
+    };
+    this.bioTextRO = 'ResizeObserver' in window ? new ResizeObserver(() => {
+      pairs.forEach(([nameEl, textEl]) => { if (nameEl && textEl) place(nameEl, textEl); });
+    }) : null;
+    pairs.forEach(([nameEl, textEl]) => {
+      if (!nameEl || !textEl) return;
+      place(nameEl, textEl);
+      if (this.bioTextRO) this.bioTextRO.observe(nameEl);
+    });
+  }
+
+  // The wrap's own aspect-ratio box is taller than the photo alone (it reserves room for
+  // the "Cerrar Bio" row above it), so a normal-flow margin after the wrap always inherits
+  // that extra air. Positioning the button row against the photo's ACTUAL measured bottom
+  // edge instead — the same "measure real, don't guess" approach used elsewhere — is what
+  // actually gets it flush against the photo.
+  initBtnRowPosition() {
+    const outer = this.sociosWrapRef.current ? this.sociosWrapRef.current.parentElement : null;
+    const photoBox = this.sociosPhotoBoxRef.current, btnRow = this.sociosBtnRowRef.current;
+    if (!outer || !photoBox || !btnRow) return;
+    const place = () => {
+      const outerRect = outer.getBoundingClientRect(), photoRect = photoBox.getBoundingClientRect();
+      btnRow.style.top = Math.round(photoRect.bottom - outerRect.top + 12) + 'px';
+    };
+    // Same "measure only after layout has actually settled" deferral used for Hero/Como —
+    // reading this synchronously here risked the same too-small bogus value documented
+    // there, since the wrap's aspect-ratio sizing hasn't necessarily resolved yet.
+    requestAnimationFrame(() => requestAnimationFrame(place));
+    if ('ResizeObserver' in window) {
+      this.btnRowRO = new ResizeObserver(place);
+      this.btnRowRO.observe(photoBox);
+    } else {
+      window.addEventListener('resize', place);
+      this.onBtnRowResize = place;
+    }
+  }
+
+  // "Escríbenos": the heading and email font-sizes were driven by vw-based clamp()s —
+  // scaling off the raw VIEWPORT width — while everything's position (left/top/width) is
+  // a percentage of this WRAP, whose own width is the viewport minus the section's padding
+  // and, past 1360px, capped by max-width entirely. Those two references drift apart at
+  // most sizes, so the heading rendered larger than its box actually allows for and "mos."
+  // encroached on the email/address/social block. Sizing both fonts off the wrap's own
+  // measured width (the same reference the positions already use) keeps every proportion
+  // exactly matched to Figma's, at any viewport, the same fix pattern already used for
+  // section 2's title sizing.
+  initFooterScale() {
+    const wrap = this.footerWrapRef.current, heading = this.footerHeadingRef.current, email = this.footerEmailRef.current;
+    const social = this.footerSocialRef.current;
+    if (!wrap || !heading || !email) return;
+    const scale = () => {
+      // Mobile shows footerMobileRef's plain stacked block instead (see applyResponsive) —
+      // this only scales the desktop percentage-positioned wrap, which stays hidden on
+      // mobile, so there's nothing to do there. The check has to live INSIDE scale(),
+      // not gate whether scale()/the observer below even get set up, though — bailing out
+      // of the whole function at mount (like this used to) meant a page that first loaded
+      // on mobile never created the observer at all, so resizing an actual browser window
+      // up into desktop width later left the heading/email at their raw, unscaled clamp()
+      // values — the original oversized, overlapping "hablemos." bug this function exists
+      // to prevent.
+      if (window.innerWidth < 900) return;
+      const w = wrap.getBoundingClientRect().width;
+      if (!w) return;
+      heading.style.fontSize = Math.max(40, w * (431.725 / 1889)) + 'px';
+      email.style.fontSize = Math.max(22, w * (49.232 / 1889)) + 'px';
+      // Same fix for the small print — it was a static 20px while its position scales
+      // with the wrap, so at any wrap narrower than Figma's own 1889px reference it read
+      // proportionally too large and reached further right than intended, same as above.
+      const smallSize = Math.max(14, w * (20 / 1889)) + 'px';
+      if (social) social.querySelectorAll('a').forEach((a) => { a.style.fontSize = smallSize; });
+    };
+    requestAnimationFrame(() => requestAnimationFrame(scale));
+    // ResizeObserver alone isn't enough: it watches wrap's own box, but wrap sits under
+    // applyResponsive's display:none/block toggle, and in practice (confirmed by testing
+    // a real mobile->desktop resize) that display flip doesn't reliably produce a
+    // ResizeObserver notification here. A plain window resize listener is the same
+    // belt-and-suspenders fix already proven for the Hero/Como/Socios mode-crossing bugs,
+    // so it's kept alongside the observer (which still helps for width changes that
+    // aren't a window resize, e.g. DevTools panel toggling).
+    if ('ResizeObserver' in window) {
+      this.footerScaleRO = new ResizeObserver(scale);
+      this.footerScaleRO.observe(wrap);
+    }
+    window.addEventListener('resize', scale);
+    this.onFooterResize = scale;
+  }
+
+  // "Cómo trabajamos": same rising-navy-panel handoff as Hero→"Quiénes somos". "Por qué
+  // Fika Comms" itself does NOT fade — it just gets covered by the opaque panel, exactly
+  // like Hero was, with a long dwell at the start so there's real time to read it before
+  // anything moves. Once covered, the panel holds TWO text blocks that swap via a
+  // horizontal slide — content doesn't advance until that second swap has fully played out.
+  initComoTransition() {
+    const wrap = this.comoWrapRef.current, porQue = this.porQueSectionRef.current, como = this.comoRef.current;
+    const slideWrap = this.comoSlideWrapRef.current;
+    const slideA = this.comoSlideARef.current, slideB = this.comoSlideBRef.current;
+    const leftA = this.comoLeftARef.current, rightA = this.comoRightARef.current;
+    const leftB = this.comoLeftBRef.current, rightB = this.comoRightBRef.current;
+    const paraA = this.comoParaARef.current, paraB = this.comoParaBRef.current;
+    if (!wrap || !porQue || !como || !slideWrap) return;
+    if (this.reduced) return; // base markup already shows both text blocks stacked, fully visible, no JS needed.
+
+    // Each paragraph sits beside its heading's first line. A DOM rect on the first-line
+    // text itself is unreliable here (huge 200px+ inline text reports an inflated bounding
+    // box that doesn't match its visual ink), so the line's real width is measured with a
+    // canvas instead — same technique already used for section 2's title sizing — and the
+    // vertical position is computed from the heading's own font metrics, not a measured box.
+    const measureCanvas = document.createElement('canvas').getContext('2d');
+    const textWidthAt = (text, px, weight, family) => {
+      measureCanvas.font = weight + ' ' + px + 'px ' + family;
+      return measureCanvas.measureText(text).width;
+    };
+    const placeParas = () => {
+      const mobile = window.innerWidth < 900;
+      [['de', paraA, leftA, rightA, slideA], ['para', paraB, leftB, rightB, slideB]].forEach(([firstLine, para, leftGroup, rightEl, slideEl]) => {
+        if (!para || !leftGroup) return;
+        if (mobile) {
+          // Client reference: eyebrow + heading stacked tightly (already how leftGroup +
+          // rightEl naturally sit), with the paragraph BELOW the whole title block instead
+          // of beside "de"/"para" like desktop's side-by-side kinetic layout.
+          para.style.left = '0px';
+          para.style.maxWidth = 'none';
+          para.style.width = '100%';
+          if (rightEl) {
+            rightEl.style.marginTop = '0px';
+            // Use element.getBoundingClientRect() directly — Range.getBoundingClientRect()
+            // is unreliable on Safari iOS for large Sora 800 text with line-height<1,
+            // sometimes returning stale or empty rects before a forced reflow.
+            const groupRect = leftGroup.getBoundingClientRect();
+            const rightRect = rightEl.getBoundingClientRect();
+            para.style.top = Math.round(rightRect.bottom - groupRect.top + 24) + 'px';
+          }
+          // The paragraph hangs below "verdad."/"siempre." via absolute positioning (out
+          // of flow, interleaving it between DOM-sibling giant words) — so without this,
+          // the slide's own natural height ends at "verdad."/"siempre.", and — now that
+          // slideA/slideB stack normally instead of cross-fading in place (see the mobile
+          // bail-out above) — the next slide's margin-top-based stacking lands right on
+          // top of this paragraph's text instead of below it.
+          if (slideEl) {
+            // Force a reflow so para's new top value is reflected before we read its rect.
+            void para.offsetHeight;
+            const paraRect = para.getBoundingClientRect();
+            const slideRect = slideEl.getBoundingClientRect();
+            slideEl.style.minHeight = Math.round(paraRect.bottom - slideRect.top) + 'px';
+          }
+          // Extra breathing room between the two stacked blocks now that both sit in
+          // normal flow instead of cross-fading in place — the base markup's 24px reads
+          // as too tight once they're both on screen together.
+          if (slideEl === slideB) slideEl.style.marginTop = '56px';
+          return;
+        }
+        // Undo the mobile-only reservation above in case this ever re-runs after a
+        // resize from mobile to desktop width — desktop's absolute-overlap slides don't
+        // need (or want) a minHeight on the slide itself.
+        if (slideEl) slideEl.style.minHeight = '';
+        const ps = leftGroup.querySelectorAll('p');
+        const eyebrow = ps[0], headingLine = ps[1];
+        if (!eyebrow || !headingLine) return;
+        const groupRect = leftGroup.getBoundingClientRect(), eyebrowRect = eyebrow.getBoundingClientRect();
+        const fontSize = parseFloat(getComputedStyle(headingLine).fontSize);
+        const lineHeightPx = fontSize * 0.95;
+        const headingMarginTop = parseFloat(getComputedStyle(headingLine).marginTop) || 0;
+        const headingTop = (eyebrowRect.bottom - groupRect.top) + headingMarginTop;
+        const textWidth = textWidthAt(firstLine, fontSize, '800', 'Sora, sans-serif');
+        const margin = Math.max(24, lineHeightPx * 0.15);
+        para.style.left = Math.round(textWidth + margin) + 'px';
+        para.style.top = Math.round(headingTop + lineHeightPx * 0.32) + 'px';
+        // The paragraph is absolutely positioned (out of flow), so a long one can extend
+        // taller than its heading group and run into the giant word on the next row below
+        // (e.g. "verdad."/"siempre.") — push that next word down by exactly the overflow.
+        // Giant Sora text reports a box far taller than its visible ink (same reason the
+        // canvas measurement above exists), so the overflow has to come from the actual
+        // rendered text extent (Range), not offsetTop/offsetHeight, or it under-corrects.
+        if (rightEl) {
+          rightEl.style.marginTop = '0px';
+          const paraRange = document.createRange();
+          paraRange.selectNodeContents(para);
+          const rightRange = document.createRange();
+          rightRange.selectNodeContents(rightEl);
+          const overflow = paraRange.getBoundingClientRect().bottom - rightRange.getBoundingClientRect().top;
+          rightEl.style.marginTop = overflow > 0 ? Math.ceil(overflow + 32) + 'px' : '0px';
+        }
+      });
+    };
+    placeParas();
+    if (document.fonts && document.fonts.load) {
+      document.fonts.load('800 100px Sora').catch(() => {}).then(placeParas);
+    }
+
+    const seg = (p, a, b) => Math.min(1, Math.max(0, (p - a) / (b - a)));
+
+    // Same "decide once at mount, never revisited" problem as Hero's pin (see its
+    // pinActive/setupPin/teardownPin comment) — resizing an actual browser window across
+    // 900px, not just reloading at a new width, left this stuck in whichever mode "Por
+    // qué" first loaded in. Same fix here: make the decision redo-able on every resize.
+    let pinActive = false;
+    let pinSetupToken = 0;
+
+    const teardownPin = () => {
+      if (!pinActive) return;
+      pinActive = false;
+      pinSetupToken++;
+      if (this.rafComoTransition) { cancelAnimationFrame(this.rafComoTransition); this.rafComoTransition = null; }
+      if (this.comoSlideRO) { this.comoSlideRO.disconnect(); this.comoSlideRO = null; }
+      wrap.style.height = '';
+      // porQue's min-height and como's position/min-height/background are authored inline
+      // in the base markup — clearing them to '' would fall through to the browser default
+      // instead of restoring what the markup actually says, so they're reset to those
+      // exact original values instead (same reasoning as Hero's teardownPin).
+      porQue.style.position = ''; porQue.style.top = ''; porQue.style.zIndex = '';
+      como.style.position = 'relative'; como.style.top = ''; como.style.height = '';
+      como.style.minHeight = '100vh'; como.style.zIndex = ''; como.style.transform = '';
+      como.style.transition = '';
+      [slideA, slideB].forEach((el) => {
+        if (!el) return;
+        el.style.position = 'relative'; el.style.top = ''; el.style.left = ''; el.style.width = '';
+        el.style.margin = ''; el.style.opacity = ''; el.style.transform = '';
+      });
+      if (slideB) slideB.style.marginTop = '24px';
+      if (leftA) leftA.style.transform = '';
+      if (rightA) rightA.style.transform = '';
+      if (leftB) leftB.style.transform = '';
+      if (rightB) rightB.style.transform = '';
+      slideWrap.style.height = '';
+    };
+
+    const setupPin = () => {
+      if (pinActive) return;
+      pinActive = true;
+      const token = ++pinSetupToken;
+
+      // Reserve real space for whichever slide is tallest — absolute removes both slides
+      // from normal flow (so they can overlap and cross-fade in place), so without this the
+      // wrapper collapses to nothing and the taller slide gets clipped by the section's own
+      // overflow:hidden. A one-shot measurement here is stale before Sora finishes loading
+      // (measured against a fallback font's smaller metrics), so a ResizeObserver keeps it
+      // synced to whatever the slides actually render at, same fix as section 3's paragraph.
+      const updateSlideHeight = () => {
+        const realBottom = (slideEl) => slideEl ? slideEl.offsetHeight : 0;
+        slideWrap.style.height = Math.max(realBottom(slideA), realBottom(slideB)) + 'px';
+      };
+      updateSlideHeight();
+      if ('ResizeObserver' in window) {
+        // placeParas() first — a font swap or width change can reflow the paragraph and
+        // change how much it overflows into "verdad."/"siempre.", so the clearance margin
+        // needs re-measuring on the same trigger, before the wrapper height is finalized.
+        this.comoSlideRO = new ResizeObserver(() => { placeParas(); updateSlideHeight(); });
+        if (slideA) this.comoSlideRO.observe(slideA);
+        if (slideB) this.comoSlideRO.observe(slideB);
+      }
+
+      [slideA, slideB].forEach((el) => {
+        if (!el) return;
+        el.style.position = 'absolute';
+        el.style.top = '0';
+        el.style.left = '0';
+        el.style.width = '100%';
+        el.style.margin = '0';
+        el.style.opacity = '0';
+      });
+      if (slideA) slideA.style.transform = 'translateY(24px)';
+      // Content B starts already split apart, off-screen on the sides it'll enter from —
+      // the first line's group enters from the right, the second line from the left, so
+      // the two halves visually converge into place instead of arriving as one flat block.
+      if (leftB) leftB.style.transform = 'translateX(100vw)';
+      if (rightB) rightB.style.transform = 'translateX(-100vw)';
+
+      // Same "measure real height only after layout has settled" deferral as the Hero
+      // transition — reading porQue.offsetHeight synchronously here risked the same
+      // too-small bogus value documented there.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (token !== pinSetupToken) return; // torn down (or re-setup) again before this fired
+          const porQueHeight = porQue.offsetHeight;
+          const hold = window.innerHeight * 2.4;
+          wrap.style.height = 'calc(' + porQueHeight + 'px + ' + hold + 'px)';
+          porQue.style.position = 'sticky';
+          porQue.style.top = '0px';
+          porQue.style.zIndex = '1';
+          como.style.position = 'sticky';
+          como.style.top = '0px';
+          como.style.height = porQueHeight + 'px';
+          como.style.minHeight = '0';
+          como.style.zIndex = '2';
+          como.style.transform = 'translateY(100%)';
+          como.style.transition = 'none';
+
+          let last = -1;
+          const tick = () => {
+            if (token !== pinSetupToken) return; // stop once torn down
+            const rect = wrap.getBoundingClientRect();
+            const travel = wrap.offsetHeight - porQue.offsetHeight;
+            let p = travel > 0 ? -rect.top / travel : 0;
+            p = Math.min(1, Math.max(0, p));
+
+            if (Math.abs(p - last) > 0.001) {
+              // 0.00–0.35: "Por qué" stays exactly as arrived — a long, deliberate dwell so
+              // there's real time to read it before anything starts moving.
+              // 0.35–0.43: navy panel rises to cover — same mechanic as section 1→2.
+              const rise = seg(p, 0.35, 0.43);
+              como.style.transform = 'translateY(' + (1 - rise) * 100 + '%)';
+
+              // 0.43–0.50: content A settles in (fade + rise), holds until 0.80.
+              if (slideA) {
+                const settle = seg(p, 0.43, 0.50);
+                const fadeOut = 1 - seg(p, 0.80, 0.88);
+                slideA.style.opacity = String(Math.min(settle, fadeOut));
+                slideA.style.transform = 'translateY(' + ((1 - settle) * 24).toFixed(1) + 'px)';
+              }
+              // 0.80–0.88: content A splits apart on exit — "de" + its paragraph slide out
+              // to the left, "verdad." slides out to the right — instead of leaving as one
+              // flat block, which is what made the earlier version feel rigid.
+              if (leftA) {
+                const exit = seg(p, 0.80, 0.88);
+                leftA.style.transform = 'translateX(-' + (exit * 100).toFixed(1) + 'vw)';
+              }
+              if (rightA) {
+                const exit = seg(p, 0.80, 0.88);
+                rightA.style.transform = 'translateX(' + (exit * 100).toFixed(1) + 'vw)';
+              }
+              // 0.84–0.92: content B converges into place — "para" + its paragraph arrive
+              // from the right (continuing the leftward flow "de" left on), "siempre."
+              // arrives from the left (continuing the rightward flow "verdad." left on).
+              if (slideB) {
+                const enter = seg(p, 0.84, 0.92);
+                slideB.style.opacity = String(enter);
+              }
+              if (leftB) {
+                const enter = seg(p, 0.84, 0.92);
+                leftB.style.transform = 'translateX(' + ((1 - enter) * 100).toFixed(1) + 'vw)';
+              }
+              if (rightB) {
+                const enter = seg(p, 0.84, 0.92);
+                rightB.style.transform = 'translateX(-' + ((1 - enter) * 100).toFixed(1) + 'vw)';
+              }
+              last = p;
+            }
+            this.rafComoTransition = requestAnimationFrame(tick);
+          };
+          this.rafComoTransition = requestAnimationFrame(tick);
+        });
+      });
+    };
+
+    // Mobile: a device shorter than "Por qué"'s own content had no way to keep scrolling
+    // to read the rest of it — the sticky pin traps scroll into driving the cross-fade
+    // instead of revealing more of the pinned section, cutting the copy off with no way to
+    // reach it. Skipping the whole pin/cross-fade setup and leaving slideA/slideB in their
+    // natural stacked flow (already how the base markup lays them out — slideA, then
+    // slideB below it) makes this behave like a normal, safely scrollable page section
+    // instead, at the cost of the desktop-only rise/cross-fade choreography. Mobile also
+    // uses a shorter hold (1.3x vs 2.4x) when the pin IS active — 2.4x felt like an
+    // unreasonable amount of scroll on a phone — but since mobile skips the pin entirely
+    // now, that only ever applied on desktop-width anyway.
+    const syncMode = () => {
+      if (window.innerWidth < 900) teardownPin(); else setupPin();
+      placeParas();
+    };
+
+    window.addEventListener('resize', syncMode);
+    this.onComoResize = syncMode;
+    syncMode();
+  }
+
+  renderVals() {
+    return {
+      navContacto: this.navContacto,
+      dotRef: this.dotRef,
+      ringRef: this.ringRef,
+      headerRef: this.headerRef,
+      navRef: this.navRef,
+      headerCtaRef: this.headerCtaRef,
+      quoteHeroRef: this.quoteHeroRef,
+      qWordSlowRef: this.qWordSlowRef,
+      qWordIsSmoothRef: this.qWordIsSmoothRef,
+      qWordSmoothRef: this.qWordSmoothRef,
+      qWordIsFastRef: this.qWordIsFastRef,
+      quoteTooltipRef: this.quoteTooltipRef,
+      heroWrapRef: this.heroWrapRef,
+      heroSectionRef: this.heroSectionRef,
+      quienesRef: this.quienesRef,
+      quienesContentRef: this.quienesContentRef,
+      quienesHeadingRef: this.quienesHeadingRef,
+      quienesSomosRef: this.quienesSomosRef,
+      quienesFikaRef: this.quienesFikaRef,
+      quienesCommsRef: this.quienesCommsRef,
+      quienesSlide1Ref: this.quienesSlide1Ref,
+      quienesSlide2Ref: this.quienesSlide2Ref,
+      porQueSectionRef: this.porQueSectionRef,
+      porQueWrapRef: this.porQueWrapRef,
+      porQuePhotoRef: this.porQuePhotoRef,
+      porQueTitleRef: this.porQueTitleRef,
+      porQueLine1Ref: this.porQueLine1Ref,
+      porQueLine2Ref: this.porQueLine2Ref,
+      porQueLine3Ref: this.porQueLine3Ref,
+      porQueDescRef: this.porQueDescRef,
+      porQueCupRef: this.porQueCupRef,
+      comoWrapRef: this.comoWrapRef,
+      comoRef: this.comoRef,
+      comoContentRef: this.comoContentRef,
+      comoSlideWrapRef: this.comoSlideWrapRef,
+      comoSlideARef: this.comoSlideARef,
+      comoSlideBRef: this.comoSlideBRef,
+      comoLeftARef: this.comoLeftARef,
+      comoRightARef: this.comoRightARef,
+      comoLeftBRef: this.comoLeftBRef,
+      comoRightBRef: this.comoRightBRef,
+      comoParaARef: this.comoParaARef,
+      comoParaBRef: this.comoParaBRef,
+      sociosRef: this.sociosRef,
+      sociosWrapRef: this.sociosWrapRef,
+      sociosPhotoBoxRef: this.sociosPhotoBoxRef,
+      sociosPhotoImgRef: this.sociosPhotoImgRef,
+      sociosCutoutBoxRef: this.sociosCutoutBoxRef,
+      sociosCutoutImgRef: this.sociosCutoutImgRef,
+      sociosBioPhotoBoxRef: this.sociosBioPhotoBoxRef,
+      sociosBioPhotoDeniseRef: this.sociosBioPhotoDeniseRef,
+      sociosBioPhotoManuRef: this.sociosBioPhotoManuRef,
+      sociosNombresRef: this.sociosNombresRef,
+      sociosHeadingRef: this.sociosHeadingRef,
+      sociosBioNameDeniseRef: this.sociosBioNameDeniseRef,
+      sociosBioTextDeniseRef: this.sociosBioTextDeniseRef,
+      sociosBioNameManuRef: this.sociosBioNameManuRef,
+      sociosBioTextManuRef: this.sociosBioTextManuRef,
+      sociosCloseBioRef: this.sociosCloseBioRef,
+      sociosBtnRowRef: this.sociosBtnRowRef,
+      sociosMobileRef: this.sociosMobileRef,
+      sociosBioModalRef: this.sociosBioModalRef,
+      sociosBioModalSheetRef: this.sociosBioModalSheetRef,
+      sociosBioModalPhotoRef: this.sociosBioModalPhotoRef,
+      sociosBioModalNameRef: this.sociosBioModalNameRef,
+      sociosBioModalRoleRef: this.sociosBioModalRoleRef,
+      sociosBioModalTaglineRef: this.sociosBioModalTaglineRef,
+      sociosBioModalTextRef: this.sociosBioModalTextRef,
+      backToTopRef: this.backToTopRef,
+      scrollToTop: this.scrollToTop,
+      copyEmailBtnRef: this.copyEmailBtnRef,
+      footerWrapRef: this.footerWrapRef,
+      footerMobileRef: this.footerMobileRef,
+      footerHeadingRef: this.footerHeadingRef,
+      footerEmailRef: this.footerEmailRef,
+      footerSocialRef: this.footerSocialRef,
+      copyEmail: this.copyEmail,
+      emailCopied: this.state.emailCopied,
+      emailNotCopied: !this.state.emailCopied,
+      isDeniseBioOpen: this.state.activeBio === 'denise',
+      isManuBioOpen: this.state.activeBio === 'manu',
+      toggleDeniseBio: this.toggleDeniseBio,
+      toggleManuBio: this.toggleManuBio,
+      closeBio: this.closeBio,
+    };
+  }
+}
+</script>
+</body>
+</html>

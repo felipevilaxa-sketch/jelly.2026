@@ -1,0 +1,232 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "components/core/**",
+              "ui_kits/landing/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Sora|Inter))/i]",
+        "message": "Font not provided by the design system. Available: Sora, Inter."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute > JSXIdentifier[name!=/^(?:variant|size|disabled|fullWidth|href|as|children|key|ref|className|style|children)$/]",
+        "message": "<Button> doesn't accept that prop. Declared props: variant, size, disabled, fullWidth, href, as, children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:primary|secondary|ghost)$/]",
+        "message": "<Button> variant must be one of 'primary' | 'secondary' | 'ghost'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='size'] > Literal[value!=/^(?:small|medium|large)$/]",
+        "message": "<Button> size must be one of 'small' | 'medium' | 'large'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='as'] > Literal[value!=/^(?:button|a|div)$/]",
+        "message": "<Button> as must be one of 'button' | 'a' | 'div'."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {
+      "Button": {
+        "replaces": []
+      }
+    },
+    "tokens": [
+      "--blue-500",
+      "--blue-soft",
+      "--border-default",
+      "--border-ghost",
+      "--border-hairline",
+      "--color-bg-accent",
+      "--color-bg-accent-soft",
+      "--color-bg-page",
+      "--color-bg-surface",
+      "--color-border-accent",
+      "--color-border-default",
+      "--color-border-subtle",
+      "--color-text-muted",
+      "--color-text-on-accent",
+      "--color-text-primary",
+      "--color-text-secondary",
+      "--color-text-strong",
+      "--duration-base",
+      "--duration-fast",
+      "--ease-standard",
+      "--font-body",
+      "--font-display",
+      "--gray-150",
+      "--gray-200",
+      "--gray-500",
+      "--ink-500",
+      "--ink-900",
+      "--layout-gutter",
+      "--layout-max",
+      "--leading-body",
+      "--leading-body-lg",
+      "--leading-display",
+      "--leading-heading",
+      "--leading-hero",
+      "--leading-subhead",
+      "--navy-900",
+      "--radius-full",
+      "--radius-md",
+      "--radius-sm",
+      "--ring-inset",
+      "--ring-inset-accent",
+      "--shadow-none",
+      "--space-2xl",
+      "--space-3xl",
+      "--space-4xl",
+      "--space-5xl",
+      "--space-lg",
+      "--space-md",
+      "--space-sm",
+      "--space-xl",
+      "--space-xs",
+      "--spacing-lg",
+      "--spacing-md",
+      "--spacing-sm",
+      "--spacing-xl",
+      "--spacing-xs",
+      "--surface-50",
+      "--text-body",
+      "--text-body-lg",
+      "--text-button-lg",
+      "--text-button-md",
+      "--text-button-sm",
+      "--text-caption",
+      "--text-display",
+      "--text-eyebrow",
+      "--text-heading",
+      "--text-hero",
+      "--text-subhead",
+      "--tracking-eyebrow",
+      "--tracking-eyebrow-wide",
+      "--weight-bold",
+      "--weight-regular",
+      "--weight-semibold",
+      "--white-base"
+    ],
+    "tokenKinds": {
+      "--blue-500": "color",
+      "--blue-soft": "color",
+      "--navy-900": "color",
+      "--gray-500": "color",
+      "--gray-200": "color",
+      "--gray-150": "color",
+      "--ink-900": "color",
+      "--ink-500": "color",
+      "--surface-50": "color",
+      "--white-base": "color",
+      "--color-bg-page": "color",
+      "--color-bg-surface": "color",
+      "--color-bg-accent": "color",
+      "--color-bg-accent-soft": "color",
+      "--color-text-primary": "color",
+      "--color-text-secondary": "color",
+      "--color-text-muted": "font",
+      "--color-text-strong": "font",
+      "--color-text-on-accent": "color",
+      "--color-border-default": "color",
+      "--color-border-subtle": "color",
+      "--color-border-accent": "color",
+      "--font-display": "font",
+      "--font-body": "font",
+      "--weight-regular": "font",
+      "--weight-semibold": "font",
+      "--weight-bold": "font",
+      "--text-display": "font",
+      "--leading-display": "font",
+      "--text-hero": "font",
+      "--leading-hero": "font",
+      "--text-heading": "font",
+      "--leading-heading": "font",
+      "--text-subhead": "font",
+      "--leading-subhead": "font",
+      "--text-body-lg": "font",
+      "--leading-body-lg": "font",
+      "--text-body": "font",
+      "--leading-body": "font",
+      "--text-button-lg": "font",
+      "--text-button-md": "font",
+      "--text-button-sm": "font",
+      "--text-eyebrow": "font",
+      "--tracking-eyebrow": "font",
+      "--tracking-eyebrow-wide": "font",
+      "--text-caption": "font",
+      "--space-xs": "spacing",
+      "--space-sm": "spacing",
+      "--space-md": "spacing",
+      "--space-lg": "spacing",
+      "--space-xl": "spacing",
+      "--space-2xl": "spacing",
+      "--space-3xl": "spacing",
+      "--space-4xl": "spacing",
+      "--space-5xl": "spacing",
+      "--layout-max": "spacing",
+      "--layout-gutter": "spacing",
+      "--radius-sm": "radius",
+      "--radius-md": "radius",
+      "--radius-full": "radius",
+      "--border-hairline": "color",
+      "--border-default": "color",
+      "--border-ghost": "color",
+      "--ring-inset": "spacing",
+      "--ring-inset-accent": "spacing",
+      "--shadow-none": "shadow",
+      "--ease-standard": "other",
+      "--duration-fast": "other",
+      "--duration-base": "other",
+      "--spacing-lg": "spacing",
+      "--spacing-md": "spacing",
+      "--spacing-sm": "spacing",
+      "--spacing-xl": "spacing",
+      "--spacing-xs": "spacing"
+    },
+    "fontFamilies": [
+      "Inter",
+      "Sora"
+    ]
+  }
+}
